@@ -111,3 +111,10 @@ VALUES (1,'2020-11-10',NULL,59.99),
 INSERT INTO `utilisateurs` 
 VALUES (1,'admin','admin123','password',1),
   (2,'user1','user1','password',0);
+
+  /* -------------------------------------------------------------------------------
+                                        Utilisateur
+  -------------------------------------------------------------------------------------*/
+
+create user 'Rungame_Ad'@'%' identified by '12-Soleil&';
+grant select, update, insert, delete on e5_rungame.* to 'Rungame_Ad'@'%'; 
