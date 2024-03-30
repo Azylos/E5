@@ -98,17 +98,17 @@ VALUES (1,'Action'),
   (4,'RPG'),
   (5,'Sport');
 
-INSERT INTO `jeux` 
-VALUES (1,1,1,'Assassin\'s Creed Valhalla','Explorez l\'âge des Vikings dans','2020-11-10','trending-01.jpg'),
-  (2,2,4,'Mass Effect: Legendary Edition','Revivez l\'épopée spatiale de She','2021-05-14','trending-02.jpg'),
-  (3,3,3,'Call of Duty: Modern Warfare','Plongez dans l\'intensité des com','2019-10-25','trending-03.jpg'),
-  (4,4,4,'Final Fantasy VII Remake','Redécouvrez le chef-d\'œuvre RPG','2020-04-10','trending-02.jpg'),
-  (5,5,2,'The Legend of Zelda: Breath of t','Explorez le vaste royaume d\'Hyru','2017-03-03','trending-01.jpg'),
-  (6,1,1,'Far Cry 6','Affrontez un dictateur impitoyab','2021-10-07','trending-03.jpg'),
-  (7,2,4,'Dragon Age: Inquisition','Partez en quête d\'aventures dans','2014-11-18','trending-02.jpg'),
-  (8,3,1,'Call of Duty: Warzone','Plongez dans des combats battle','2020-03-10','trending-01.jpg'),
-  (9,4,2,'Kingdom Hearts III','Rejoignez Sora et ses amis dans','2019-01-29','trending-03.jpg'),
-  (10,5,5,'Mario Kart 8 Deluxe','Affrontez vos amis dans des cour','2017-04-28','trending-02.jpg');
+INSERT INTO `jeux` VALUES 
+  (1, 1, 1, "Assassin's Creed Valhalla", "Explorez l'âge des Vikings dans ce jeu d'action-aventure.", "2020-11-10"),
+  (2, 2, 4, "Mass Effect: Legendary Edition", "Revivez l'épopée spatiale de Shepard dans cette collection remasterisée.", "2021-05-14"),
+  (3, 3, 3, "Call of Duty: Modern Warfare", "Plongez dans l'intensité des combats modernes dans ce jeu de tir.", "2019-10-25"),
+  (4, 4, 4, "Final Fantasy VII Remake", "Redécouvrez le chef-d'œuvre RPG de Square Enix avec des graphismes époustouflants.", "2020-04-10"),
+  (5, 5, 2, "The Legend of Zelda: Breath of the Wild", "Explorez le vaste royaume d'Hyrule dans cette aventure épique.", "2017-03-03"),
+  (6, 1, 1, "Far Cry 6", "Affrontez un dictateur impitoyable dans un pays insulaire tropical.", "2021-10-07"),
+  (7, 2, 4, "Dragon Age: Inquisition", "Partez en quête d'aventures dans ce RPG fantastique de BioWare.", "2014-11-18"),
+  (8, 3, 1, "Call of Duty: Warzone", "Plongez dans des combats battle royale intenses avec des centaines de joueurs.", "2020-03-10"),
+  (9, 4, 2, "Kingdom Hearts III", "Rejoignez Sora et ses amis dans cette aventure magique qui mélange Disney et Final Fantasy.", "2019-01-29"),
+  (10, 5, 5, "Mario Kart 8 Deluxe", "Affrontez vos amis dans des courses endiablées avec vos personnages Nintendo préférés.", "2017-04-28");
 
 INSERT INTO `tarif` 
 VALUES (1,'2020-11-10',NULL,59.99),
