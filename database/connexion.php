@@ -12,7 +12,7 @@
 	}
 	//Capture des exceptions et affichage des informations de celles-ci
 	catch(PDOException $e) {
-		echo "<h4>Erreur de connexion : </h4>" .$e->getMessage();
+		// echo "<h4>Erreur de connexion : </h4>" .$e->getMessage();
 	}		
 
 
