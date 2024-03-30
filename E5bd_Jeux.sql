@@ -68,6 +68,20 @@ CREATE TABLE `vouloir` (
   CONSTRAINT `FK_VouloirUtilisateurs` FOREIGN KEY (`IdUtilisateurs`) REFERENCES `utilisateurs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /* -------------------------------------------------------------------------------
+                                        création d'une vue "jeux détail"
+  -------------------------------------------------------------------------------------*/
+
+  CREATE VIEW vue_jeux_details AS
+    SELECT j.id AS JeuxID, j.titre AS Titre, j.description AS Description, j.dateDeSortie AS DateDeSortie, j.image AS Image,
+       g.id AS GenreID, g.libelle AS Genre,
+       e.id AS EditeurID, e.nom AS Editeur,
+       t.id AS TarifID, t.tarif AS Tarif,t.dateDebut AS dateDebutTarif,t.dateFin AS dateFinTarif
+    FROM jeux j
+    JOIN genre g ON j.IdGenre = g.id
+    JOIN editeur e ON j.IdEditeur = e.id
+    JOIN tarif t ON j.id = t.id;
+
+/* -------------------------------------------------------------------------------
                                         Jeu d'essaie
   -------------------------------------------------------------------------------------*/
 INSERT INTO `editeur` 
