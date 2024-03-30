@@ -96,11 +96,11 @@ if(isset($_GET['id'])) {
     
     // Requête SQL pour récupérer les détails du jeu depuis la vue vue_jeux_details
     $sql2 = "SELECT * FROM vue_jeux_details WHERE JeuxID = $jeu_id";
-    $result = $conn->query($sql2);
+    $result = $connexion->query($sql2);
 
-    if ($result->num_rows > 0) {
+    if ($result->rowCount() > 0) {
         // Afficher les détails du jeu
-        $row = $result->fetch_assoc();
+        $row = $result->fetch(PDO::FETCH_ASSOC);
         $titre = $row['Titre'];
         $description = $row['Description'];
         $date_de_sortie = $row['DateDeSortie'];
@@ -158,7 +158,7 @@ if(isset($_GET['id'])) {
     echo "Identifiant du jeu non spécifié.";
 }
 
-$conn->close();
+$connexion = null;
 ?>
 
   <div class="more-info">

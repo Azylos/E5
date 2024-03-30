@@ -5,15 +5,15 @@
     $password = "12-Soleil&";
     $dbname = "e5_rungame";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Vérification de la connexion
-    if ($conn->connect_error) {
-        die("Échec de la connexion: " . $conn->connect_error);
-    }
-
-    // Définition de l'encodage des caractères à UTF-8
-    $conn->set_charset("utf8mb4");
+	try {
+		$connexion = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);
+		//Definition du mode d'erreur de PDO sur Exception
+		$connexion -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	}
+	//Capture des exceptions et affichage des informations de celles-ci
+	catch(PDOException $e) {
+		echo "<h4>Erreur de connexion : </h4>" .$e->getMessage();
+	}		
 
 
 ?>

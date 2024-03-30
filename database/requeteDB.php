@@ -8,7 +8,7 @@
             INNER JOIN genre ON jeux.IdGenre = genre.id
             INNER JOIN tarif ON jeux.id = tarif.id";
 
-    $result = $conn->query($sql);
+    $result = $connexion->query($sql);
 
     
     
