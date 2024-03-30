@@ -6,3 +6,6 @@ RunGame, une récente entreprise réunionnaise qui décide de se lancer dans la 
 établir une présence en ligne afin d’améliorer ces ventes.
 # Info pratique pour l'utilisation du projet
 
+### Utilisateur base de données :
+- Nom d'utilisateur : Rungame_Ad
+- Password : "habituelle"

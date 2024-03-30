@@ -103,9 +103,9 @@ https://templatemo.com/tm-589-lugx-gaming
       <div class="row trending-box">
       <?php
         require_once("./database/requeteDB.php");
-        if ($result->num_rows > 0) {
-          // Afficher les jeux avec les détails de l'éditeur, du genre et du prix
-          while($row = $result->fetch_assoc()) {
+        if ($result->rowCount() > 0) {
+            // Afficher les jeux avec les détails de l'éditeur, du genre et du prix
+            while($row = $result->fetch(PDO::FETCH_ASSOC)) {
               echo '<div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">';
               echo '<div class="item">';
               echo '<div class="thumb">';
@@ -125,7 +125,7 @@ https://templatemo.com/tm-589-lugx-gaming
           } else {
               echo "0 résultats";
           }
-          $conn->close();
+          $connexion = null;
       ?>
       </div>
       <!-- <div class="row trending-box">
