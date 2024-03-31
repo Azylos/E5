@@ -18,7 +18,7 @@
 
 <body class="log">
   <!-- ***** Preloader Start ***** -->
-  <!-- <div id="js-preloader" class="js-preloader">
+  <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
       <span class="dot"></span>
       <div class="dots">
@@ -27,10 +27,10 @@
         <span></span>
       </div>
     </div>
-  </div> -->
+  </div>
   <?php
     require_once("../vues/navbar.php");
-    require_once("cnx.php");
+    require_once("lib/cnx.php");
   ?>
   <section>
     <form action="logIn.php" method="post">
@@ -57,9 +57,6 @@
       </div> -->
     </form>
   </section>
-  <!-- <?php
-    require_once("../vues/footer.php")
-  ?> -->
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
