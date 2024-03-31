@@ -12,4 +12,4 @@ RunGame, une récente entreprise réunionnaise qui décide de se lancer dans la 
 
 ### Information de connexion :
 - utilisateur : user1 mdp: password
-- admin123 : password
+- Admin : admin123 mdp: password
