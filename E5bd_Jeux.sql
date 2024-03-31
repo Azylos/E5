@@ -52,6 +52,7 @@ CREATE TABLE `utilisateurs` (
   `pseudo` char(32) DEFAULT NULL,
   `login` char(32) DEFAULT NULL,
   `mdp` char(32) DEFAULT NULL,
+  `imgProfil` varchar(255) DEFAULT NULL,
   `estAdmin` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
