@@ -26,22 +26,27 @@
                     </a>
                     <ul class="nav">
                         <li><a href="<?php echo ($isInProfile) ? '../index.php' : 'index.php'; ?>" class="active">Notre Boutique</a></li>
-                        <?php if(!$isLogInPage) {
-                            if(isset($_SESSION["admin"]) || isset($_SESSION["user"])){ ?>
-                                <div class="user">
-                                    <div class="avatar">
-                                        <img src="<?php echo ($isInProfile) ? 'img/'.$img : './profil/img/'.$img; ?>">
-                                    </div>
-                                    <div class="dropdown-content">
-                                        <a href="<?php echo ($isInProfile) ? 'profil.php' : './profil/profil.php'; ?>">Profil</a>
-                                        <a href="<?php echo ($isInProfile) ? 'lib/logout.php' : './profil/lib/logout.php'; ?>">Déconnexion</a>
-                                    </div>
-                                </div>
+                        <?php 
+                            if(isset($_SESSION['admin'])){ ?>
+                                <li><a href="<?php echo ($isInProfile) ? '../backend/index.php' : 'backend/index.php'; ?>" class="active">BackOffice</a></li>
                             <?php
-                            } else {
-                                echo '<li><a href="profil/logIn.php"><i class="fa-regular fa-circle-user"></i></a></li>';
                             }
-                        }
+                            if(!$isLogInPage) {
+                                if(isset($_SESSION["admin"]) || isset($_SESSION["user"])){ ?>
+                                    <div class="user">
+                                        <div class="avatar">
+                                            <img src="<?php echo ($isInProfile) ? 'img/'.$img : './profil/img/'.$img; ?>">
+                                        </div>
+                                        <div class="dropdown-content">
+                                            <a href="<?php echo ($isInProfile) ? 'profil.php' : './profil/profil.php'; ?>">Profil</a>
+                                            <a href="<?php echo ($isInProfile) ? 'lib/logout.php' : './profil/lib/logout.php'; ?>">Déconnexion</a>
+                                        </div>
+                                    </div>
+                                <?php
+                                } else {
+                                    echo '<li><a href="profil/logIn.php"><i class="fa-regular fa-circle-user"></i></a></li>';
+                                }
+                            }
                         ?>
                     </ul>   
                     

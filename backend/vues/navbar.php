@@ -14,6 +14,7 @@
                     </a>
                     <ul class="nav">
                         <li><a href="../index.php" class="active">Voir la Boutique</a></li>
+                        <li><a href="newGame.php" class="active">Ajouter un jeu</a></li>
                             <div class="user">
                                     <div class="avatar">
                                         <img src="<?= '../profil/img/'.$img?>">
