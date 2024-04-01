@@ -559,6 +559,9 @@ Header Style
   display: block;
 }
 
+.nav .deco {
+  display: none;
+}
 
 @media (max-width: 1200px) {
   .header-area .main-nav .nav li {
@@ -692,6 +695,10 @@ Header Style
   
   .nav .user:hover .dropdown-content {
     display: none;
+  }
+
+  .nav .deco {
+    display: block;
   }
 }
 

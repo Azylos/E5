@@ -42,6 +42,7 @@
                                             <a href="<?php echo ($isInProfile) ? 'lib/logout.php' : './profil/lib/logout.php'; ?>">Déconnexion</a>
                                         </div>
                                     </div>
+                                    <li class="deco"><a href="./profil/lib/logout.php">Déconnexion</a></li>
                                 <?php
                                 } else {
                                     echo '<li><a href="profil/logIn.php"><i class="fa-regular fa-circle-user"></i></a></li>';
