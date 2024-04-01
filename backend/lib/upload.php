@@ -1,5 +1,5 @@
 <?php
-    require './bdd.php';
+    require_once '../database/connexion.php';
 
     if(isset($_FILES['file'])){
 
@@ -29,28 +29,3 @@
             echo "Mauvaise extension ou taille trop grande, Une erreur est survenue";
         }
     }
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-
-</head>
-<body>
-    <form action="upload.php" method="POST" enctype="multipart/form-data">
-        <label for="file">Fichier</label>
-        <input type="file" name="file">
-        <button type="submit">Enregistrer</button>
-    </form>
-    <h2>Mes images</h2>
-    <?php 
-        $req = $db->query('SELECT name FROM file');
-        while($data = $req->fetch()){
-            // var_dump($data);
-            echo "<img src='./upload/".$data['name']."' width='300px' ><br>";
-        }
-    ?>
-</body>
-</html>
