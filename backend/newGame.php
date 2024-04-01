@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../assets/css/templatemo-lugx-gaming.css">
     <link rel="stylesheet" href="../assets/css/owl.css">
     <link rel="stylesheet" href="../assets/css/animate.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 <!--
 
@@ -32,7 +33,7 @@ https://templatemo.com/tm-589-lugx-gaming
 <body>
 
   <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
+  <!-- <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
       <span class="dot"></span>
       <div class="dots">
@@ -41,7 +42,7 @@ https://templatemo.com/tm-589-lugx-gaming
         <span></span>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- ***** Preloader End ***** -->
 
   <!-- ***** Header Area Start ***** -->
@@ -50,22 +51,33 @@ https://templatemo.com/tm-589-lugx-gaming
   ?>
   <!-- ***** Header Area End ***** -->
 
-  <!-- <div class="main-banner">
-      <div class="container">
-      <div class="row">
-          <div class="col-lg-6 align-self-center">
-          <div class="caption header-text">
-              <h6>Bienvenue chez RUNGAME</h6>
-              <h2>MEILLEUR SITE DE JEU VIDEO !</h2>
-              <p>à mettre quelque chose</p>
-              <div class="search-input">
+  <section id = "GestM">
+        
+        <div class="formM1">
+            <form  method="POST" name="formAjoutNews" action="ajoutNews.php">
+                <fieldset style="min-height:100px;">
+                    <div class="formClub">
+                        <!-- <label class="titre_1" for="">Formulaire d'ajout d'un membres</label><br> -->
+                        <legend><b> Formulaire d'ajout d'une actualitée </b> </legend> <br>
+    
+                        <!-- <input type = "hidden" name = "idNews"  placeholder="id" required></p> -->
+    
+                        <p>Photos de l'actualitée : <br><input type = "text" name = "photosNews" maxlength="50" placeholder="ex: photo.png" ></p><br>
+    
+                        <p>Descriptions de l'actualitée : <br><input type = "text" name = "descriptionsNews" maxlength="300"  required></p><br>
+    
+                        <p>L'auteur : <br><input type = "text" name = "auteurNews"  maxlength="50" placeholder="ex: Florida BARRIA" required ></p><br>
+    
+                        <p>Date de l'actualitée : <br><input type = "date" name = "dateNews" required></p><br>
+    
+                        <button type = "submit" class="button-A" role="button"><span class="text">Ajout d'une actualitée !</span><span>Ajouter!</span></button>
+                        <!-- <input class="button" type="submit"  name="Connecter" value="Ajouter un membre !" > -->
+                    </div>
+                </fieldset>
+            </form>
+        </div> 
 
-              </div>
-          </div>
-          </div>
-      </div>
-      </div>
-  </div> -->
+    </section>
 
   <?php
     require_once("../vues/footer.php")

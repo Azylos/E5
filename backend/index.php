@@ -60,23 +60,6 @@ https://templatemo.com/tm-589-lugx-gaming
     </div>
   </div>
 
-  <!-- <div class="main-banner">
-      <div class="container">
-      <div class="row">
-          <div class="col-lg-6 align-self-center">
-          <div class="caption header-text">
-              <h6>Bienvenue chez RUNGAME</h6>
-              <h2>MEILLEUR SITE DE JEU VIDEO !</h2>
-              <p>à mettre quelque chose</p>
-              <div class="search-input">
-
-              </div>
-          </div>
-          </div>
-      </div>
-      </div>
-  </div> -->
-
   <?php
     require_once("../vues/footer.php")
   ?>
