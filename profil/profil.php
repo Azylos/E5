@@ -1,4 +1,12 @@
-<?php require_once "lib/vérifSession.php" ?>
+<?php 
+    require_once "lib/vérifSession.php";
+    require_once("lib/gestionProfil.php");
+
+    // Vérifier si le formulaire a été soumis et appeler la fonction UpdateProfileImage si nécessaire
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        UpdateProfileImage();
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -24,10 +32,7 @@
         </div>
         </div>
     </div> -->
-    <?php
-        require_once("../vues/navbar.php");
-        require_once("lib/uploadPp.php");
-    ?>
+    <?php require_once("../vues/navbar.php");?>
     <br>
     <br>
     <br>
