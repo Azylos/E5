@@ -25,11 +25,15 @@
         } else {
             if ($userConnect['estAdmin'] == 1) {
                 $_SESSION['admin'] = [
+                    'id' => $userConnect['id'],
                     'pseudo' => $userConnect['pseudo'],
+                    'imgProfil' => $userConnect['imgProfil'],
                 ];
             } else {
                 $_SESSION['user'] = [
+                    'id' => $userConnect['id'],
                     'pseudo' => $userConnect['pseudo'],
+                    'imgProfil' => $userConnect['imgProfil'],
                 ];
             }
 
