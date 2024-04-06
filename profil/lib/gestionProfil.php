@@ -89,7 +89,7 @@
         return $result;
     }
     
-    function DeleteFromWishlist($IdUtilisateur, $IdJeux) {
+    function DeleteWishlist($IdUtilisateur, $IdJeux) {
         global $connexion;
         $req = "DELETE FROM vouloir WHERE IdUtilisateurs = $IdUtilisateur AND IdJeux = $IdJeux";
         $result = $connexion->exec($req);
