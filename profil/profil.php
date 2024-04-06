@@ -2,6 +2,12 @@
     require_once "lib/vérifSession.php";
     require_once("lib/gestionProfil.php");
 
+    if(isset($_SESSION['admin'])) {
+        $id = $_SESSION['admin']['id'];
+    } elseif(isset($_SESSION['user'])) {
+        $id = $_SESSION['user']['id'];
+    }
+
     // Vérifier si le formulaire a été soumis et appeler la fonction UpdateProfileImage si nécessaire
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST["updateProfileImage"])) {
@@ -47,9 +53,33 @@
             <button type="submit" name="updateProfileImage">Enregistrer</button>
         </form>
     </div>
+    
 
     <?php
-        require_once("../vues/footer.php")
+        $wishlist = ShowWishlist($id);
+        foreach ($wishlist as $game) {
+            if($game['wishlist'] == true){
+                $displayWishlists = displayWishlist($game['idJeux']);
+                while ($row = $displayWishlists->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">';
+                    echo '<div class="item">';
+                    echo '<div class="thumb">';
+                    echo '<a href="product-details.php?id=' . $row['JeuxID'] . '"><img src="../assets/images/' . $row['Image'] . '" alt=""></a>';
+                    echo '<span class="price"><em></em>' . $row['Tarif'] . '€</span>';
+                    echo '</div>';
+                    echo '<div class="down-content">';
+                    echo '<span class="category">' . $row['Genre'] . '</span>';
+                    echo '<h4>' . $row['Titre'] . '</h4>';
+                    echo '<a href="product-details.php"><i class="fa fa-shopping-bag"></i></a>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+                // echo "ID du jeu : " . $game['idJeux'] . ", Wishlist : " . $game['wishlist'] . "<br>";
+            }
+        }
+        require_once("../vues/footer.php");
+        var_dump($_SESSION);
     ?>
     
     <script src="../vendor/jquery/jquery.min.js"></script>

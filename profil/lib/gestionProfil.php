@@ -2,9 +2,9 @@
     require "../database/connexion.php";
 
     // utilisateur 
-    function ShowUsers($IdUtilisateurs) {
+    function ShowUsers($IdUtilisateur) {
         global $connexion;
-        $req = "SELECT * FROM utilisateurs WHERE id = $IdUtilisateurs";
+        $req = "SELECT * FROM utilisateurs WHERE id = $IdUtilisateur";
         $result = $connexion->query($req);
         return $result;
     }
@@ -75,23 +75,31 @@
     }
     
     // wishlist
-    function ShowWishlist() {
+    function ShowWishlist($IdUtilisateur) {
         global $connexion;
-        $req = "SELECT * FROM vouloir";
+        $req = "SELECT idJeux, wishlist FROM vouloir WHERE IdUtilisateurs = $IdUtilisateur";
+        $result = $connexion->query($req);
+        return $result;
+    }
+
+    
+    function displayWishlist($idJeux) {
+        global $connexion;
+        $req = "SELECT JeuxID, Titre, Image, Genre, Tarif FROM vue_jeux_details WHERE JeuxID = $idJeux";
         $result = $connexion->query($req);
         return $result;
     }
     
-    function AddToWishlist($IdUtilisateurs, $IdJeux, $wishlist) {
+    function AddToWishlist($IdUtilisateur, $IdJeux, $wishlist) {
         global $connexion;
-        $req = "INSERT INTO vouloir (IdUtilisateurs, IdJeux, wishlist) VALUES ($IdUtilisateurs, $IdJeux, $wishlist)";
+        $req = "INSERT INTO vouloir (IdUtilisateurs, IdJeux, wishlist) VALUES ($IdUtilisateur, $IdJeux, $wishlist)";
         $result = $connexion->exec($req);
         return $result;
     }
     
-    function DeleteFromWishlist($IdUtilisateurs, $IdJeux) {
+    function DeleteFromWishlist($IdUtilisateur, $IdJeux) {
         global $connexion;
-        $req = "DELETE FROM vouloir WHERE IdUtilisateurs = $IdUtilisateurs AND IdJeux = $IdJeux";
+        $req = "DELETE FROM vouloir WHERE IdUtilisateurs = $IdUtilisateur AND IdJeux = $IdJeux";
         $result = $connexion->exec($req);
         return $result;
     }

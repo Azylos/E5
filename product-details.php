@@ -50,45 +50,6 @@ https://templatemo.com/tm-589-lugx-gaming
   ?>
   <!-- ***** Header Area End ***** -->
 
-  <!-- <div class="page-heading header-text">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h3>Modern Warfare® II</h3>
-          <span class="breadcrumb"><a href="#">Home</a>  >  <a href="#">Shop</a>  >  Assasin Creed</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="single-product section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="left-image">
-            <img src="assets/images/single-game.jpg" alt="">
-          </div>
-        </div>
-        <div class="col-lg-6 align-self-center">
-          <h4>Call of Duty®: Modern Warfare® II</h4>
-          <span class="price"><em>$28</em> $22</span>
-          <br>
-          <form id="qty" action="#">
-  
-            <button type="submit"><i class="fa fa-shopping-bag"></i> Wishlist</button>
-          </form>
-          <ul>
-            <li><span>Genre:</span> <a href="#">Action</a>, <a href="#">Team</a>, <a href="#">Single</a></li>
-            <li><span>Editeur:</span> <a href="#">test</a></li>
-          </ul>
-        </div>
-  
-        <div class="col-lg-12">
-          <div class="sep"></div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 <?php
 require_once("./database/connexion.php");
   // Vérifier si l'identifiant du jeu est passé dans l'URL
