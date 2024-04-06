@@ -4,7 +4,9 @@
 
     // Vérifier si le formulaire a été soumis et appeler la fonction UpdateProfileImage si nécessaire
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        UpdateProfileImage();
+        if (isset($_POST["updateProfileImage"])) {
+            UpdateProfileImage();
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -42,7 +44,7 @@
         <form action="profil.php" method="POST" enctype="multipart/form-data">
             <label for="file">Fichier</label>
             <input type="file" name="file">
-            <button type="submit">Enregistrer</button>
+            <button type="submit" name="updateProfileImage">Enregistrer</button>
         </form>
     </div>
 

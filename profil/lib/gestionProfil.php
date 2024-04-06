@@ -38,7 +38,9 @@
     
             // Supprimer l'ancienne image si elle existe
             if(isset($oldImagePath) && file_exists($oldImagePath)) {
-                unlink($oldImagePath);
+                if($oldImagePath != "./img/defaut.png"){
+                    unlink($oldImagePath);
+                }                
             }
     
             $tabExtension = explode('.', $name);
