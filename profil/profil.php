@@ -16,8 +16,7 @@
     }
 
     if(isset($_POST['jeuId'])) {
-        $jeuId = $_POST['jeuId'];
-        DeleteFromWishlist($id, $jeuId);
+        DeleteFromWishlist($id, $_POST['jeuId']);
     }
 ?>
 <!DOCTYPE html>
