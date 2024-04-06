@@ -14,6 +14,11 @@
             UpdateProfileImage();
         }
     }
+
+    if(isset($_POST['jeuId'])) {
+        $jeuId = $_POST['jeuId'];
+        DeleteFromWishlist($id, $jeuId);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -71,12 +76,11 @@
                                 echo '<div class="down-content">';
                                 echo '<span class="category">' . $row['Genre'] . '</span>';
                                 echo '<h4>' . $row['Titre'] . '</h4>';
-                                echo '<a href="profil.php"><i class="fa-solid fa-xmark"></i></a>';
+                                echo '<a href="#" class="remove-wishlist" data-jeuxid="' . $row['JeuxID'] . '"><i class="fa-solid fa-xmark"></i></a>';
                                 echo '</div>';
                                 echo '</div>';
                                 echo '</div>';
                             }
-                            // echo "ID du jeu : " . $game['idJeux'] . ", Wishlist : " . $game['wishlist'] . "<br>";
                         }
                     }
                     ?>
@@ -85,7 +89,6 @@
     </div>
     <?php
         require_once("../vues/footer.php");
-        var_dump($_SESSION);
     ?>
     
     <script src="../vendor/jquery/jquery.min.js"></script>
@@ -94,5 +97,26 @@
     <script src="../assets/js/owl-carousel.js"></script>
     <script src="../assets/js/counter.js"></script>
     <script src="../assets/js/custom.js"></script>
+    <script>
+        // $ signifie utilisation de jQuery
+        $(document).ready(function() {
+            $(".remove-wishlist").click(function(event) {
+                event.preventDefault();     // Empêche le comportement par défaut du lien
+                var jeuId = $(this).data("jeuxid");   // Récupère l'identifiant du jeu à partir de l'attribut data-jeuxid de l'élément cliqué
+
+                // Effectue une requête AJAX vers profil.php avec l'identifiant du jeu en tant que données POST
+                $.ajax({
+                    type: "POST",
+                    url: "profil.php",
+                    data: { jeuId: jeuId }, // Données à envoyer avec la requête
+                    success: function(response) { 
+                        // Charge le contenu du bloc .section.trending et le remplace dans le bloc .section.trending actuel
+                        $(".section.trending").load("profil.php .section.trending");
+                    },
+                });
+            });
+        });
+    </script>
+
 
   </body>

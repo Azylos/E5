@@ -81,19 +81,11 @@
         $result = $connexion->query($req);
         return $result;
     }
-
     
     function displayWishlist($idJeux) {
         global $connexion;
         $req = "SELECT JeuxID, Titre, Image, Genre, Tarif FROM vue_jeux_details WHERE JeuxID = $idJeux";
         $result = $connexion->query($req);
-        return $result;
-    }
-    
-    function AddToWishlist($IdUtilisateur, $IdJeux, $wishlist) {
-        global $connexion;
-        $req = "INSERT INTO vouloir (IdUtilisateurs, IdJeux, wishlist) VALUES ($IdUtilisateur, $IdJeux, $wishlist)";
-        $result = $connexion->exec($req);
         return $result;
     }
     
