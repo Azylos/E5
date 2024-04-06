@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+  session_start(); 
+  require_once("./database/requeteDB.php");
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -102,30 +105,30 @@ https://templatemo.com/tm-589-lugx-gaming
         </li> -->
       </ul>
       <div class="row trending-box">
-      <?php
-        require_once("./database/requeteDB.php");
-        if ($result->rowCount() > 0) {
-            // Afficher les jeux avec les détails de l'éditeur, du genre et du prix
-            while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-              echo '<div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">';
-              echo '<div class="item">';
-              echo '<div class="thumb">';
-              echo '<a href="product-details.php?id='.$row['id'].'"><img src="assets/images/'.$row['image'].'" alt=""></a>';
-              echo '<span class="price"><em></em>'.$row['prix'].'€</span>';
-              echo '</div>';
-              echo '<div class="down-content">';
-              echo '<span class="category">'.$row['genre_libelle'].'</span>';
-              echo '<h4>'.$row['titre'].'</h4>';
-              echo '<a href="product-details.php?id='.$row['id'].'"><i class="fa fa-shopping-bag"></i></a>';
-              echo '</div>';
-              echo '</div>';
-              echo '</div>';
-          }
-          } else {
-              echo "0 résultats";
-          }
-          $connexion = null;
-      ?>
+        <?php
+          $jeux = displayGame();
+          if ($jeux->rowCount() > 0) {
+              // Afficher les jeux avec les détails de l'éditeur, du genre et du prix
+              while($row = $jeux->fetch(PDO::FETCH_ASSOC)) {
+                echo '<div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">';
+                echo '<div class="item">';
+                echo '<div class="thumb">';
+                echo '<a href="product-details.php?id='.$row['JeuxID'].'"><img src="assets/images/'.$row['Image'].'" alt=""></a>';
+                echo '<span class="price"><em></em>'.$row['Tarif'].'€</span>';
+                echo '</div>';
+                echo '<div class="down-content">';
+                echo '<span class="category">'.$row['Genre'].'</span>';
+                echo '<h4>'.$row['Titre'].'</h4>';
+                echo '<a href="product-details.php?id='.$row['JeuxID'].'"><i class="fa fa-shopping-bag"></i></a>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+            } else {
+                echo "0 résultats";
+            }
+            $connexion = null;
+          ?>
       </div>
       </div>
     </div>
