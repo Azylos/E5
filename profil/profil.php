@@ -99,9 +99,10 @@
     <script>
         // $ signifie utilisation de jQuery
         $(document).ready(function() {
-            $(".remove-wishlist").click(function(event) {
-                event.preventDefault();     // Empêche le comportement par défaut du lien
-                var jeuId = $(this).data("jeuxid");   // Récupère l'identifiant du jeu à partir de l'attribut data-jeuxid de l'élément cliqué
+            // permet de supprimer autant de jeu que l'on veut
+            $(".section.trending").on("click", ".remove-wishlist", function(event) {
+                event.preventDefault(); // Empêche le comportement par défaut du lien
+                var jeuId = $(this).data("jeuxid"); // Récupère l'identifiant du jeu à partir de l'attribut data-jeuxid de l'élément cliqué
 
                 // Effectue une requête AJAX vers profil.php avec l'identifiant du jeu en tant que données POST
                 $.ajax({
