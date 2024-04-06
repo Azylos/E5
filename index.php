@@ -1,6 +1,20 @@
 <?php 
   session_start(); 
   require_once("./database/requeteDB.php");
+
+  if(isset($_SESSION['admin'])) {
+    $id = $_SESSION['admin']['id'];
+  } elseif(isset($_SESSION['user'])) {
+    $id = $_SESSION['user']['id'];
+  }
+
+  if(isset($_POST['supJeuId'])) {
+    DeleteWishlist($id, $_POST['supJeuId']);
+  }
+
+  if(isset($_POST['addJeuId'])) {
+    AddWishlist($id, $_POST['addJeuId']);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -53,17 +67,6 @@ https://templatemo.com/tm-589-lugx-gaming
   ?>
   <!-- ***** Header Area End ***** -->
 
-  <!-- <div class="page-heading header-text">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h3>Our Shop</h3>
-          <span class="breadcrumb"><a href="#">Home</a> > Our Shop</span>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
   <div class="main-banner">
       <div class="container">
       <div class="row">
@@ -108,8 +111,9 @@ https://templatemo.com/tm-589-lugx-gaming
         <?php
           $jeux = displayGame();
           if ($jeux->rowCount() > 0) {
-              // Afficher les jeux avec les détails de l'éditeur, du genre et du prix
-              while($row = $jeux->fetch(PDO::FETCH_ASSOC)) {
+            // Afficher les jeux avec les détails de l'éditeur, du genre et du prix
+            while($row = $jeux->fetch(PDO::FETCH_ASSOC)) {
+                $InWishlist = InWishlist($id,$row['JeuxID']);
                 echo '<div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">';
                 echo '<div class="item">';
                 echo '<div class="thumb">';
@@ -119,7 +123,11 @@ https://templatemo.com/tm-589-lugx-gaming
                 echo '<div class="down-content">';
                 echo '<span class="category">'.$row['Genre'].'</span>';
                 echo '<h4>'.$row['Titre'].'</h4>';
-                echo '<a href="product-details.php?id='.$row['JeuxID'].'"><i class="fa fa-shopping-bag"></i></a>';
+                if($InWishlist){
+                  echo '<a href="#" class="remove-wishlist" data-jeuxid="' . $row['JeuxID'] . '"><i class="fa-solid fa-heart"></i></a>';
+                } else {
+                  echo '<a href="#" class="add-wishlist" data-jeuxid="' . $row['JeuxID'] . '"><i class="fa fa-shopping-bag"></i></a>';
+                }
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
@@ -146,6 +154,34 @@ https://templatemo.com/tm-589-lugx-gaming
   <script src="assets/js/owl-carousel.js"></script>
   <script src="assets/js/counter.js"></script>
   <script src="assets/js/custom.js"></script>
+  <script>
+    $(document).ready(function() {
+      $(".section.trending").on("click", ".remove-wishlist", function(event) {
+          event.preventDefault();
+          var supJeuId = $(this).data("jeuxid");
+          $.ajax({
+              type: "POST",
+              url: "index.php",
+              data: { supJeuId: supJeuId },
+              success: function(response) { 
+                  $(".section.trending").load("index.php .section.trending");
+              },
+          });
+      });
+      $(".section.trending").on("click", ".add-wishlist", function(event) {
+          event.preventDefault();
+          var addJeuId = $(this).data("jeuxid");
 
+          $.ajax({
+              type: "POST",
+              url: "index.php",
+              data: { addJeuId: addJeuId },
+              success: function(response) { 
+                  $(".section.trending").load("index.php .section.trending");
+              },
+          });
+      });
+    });
+  </script>
   </body>
 </html>
