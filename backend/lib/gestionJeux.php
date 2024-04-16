@@ -1,5 +1,5 @@
 <?php 
-    require "../database/connexion.php";
+    // require_once "./database/connexion.php";
     //éditeur
     function ShowEditor() {
         global $connexion;
@@ -74,6 +74,7 @@
         $result = $connexion->exec($req);
         return $result;
     }
+
     
     function UpdateGame($id, $idEditeur, $idGenre, $titre, $description, $dateDeSortie, $image) {
         global $connexion;

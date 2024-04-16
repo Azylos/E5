@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../assets/css/owl.css">
     <link rel="stylesheet" href="../assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="../backend/styles/styles.css">
 <!--
 
 TemplateMo 589 lugx gaming
@@ -58,6 +59,10 @@ https://templatemo.com/tm-589-lugx-gaming
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="titre_back">
+    <h2>Bienvenue sur votre espace BackOffice</h2>
   </div>
 
   <?php

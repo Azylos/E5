@@ -50,27 +50,81 @@ https://templatemo.com/tm-589-lugx-gaming
     require_once("vues/navbar.php");
   ?>
   <!-- ***** Header Area End ***** -->
+    <?php
+      // Connexion à la base de données
+      require_once("../database/connexion.php");
 
+      
+
+      // Récupérer les éditeurs
+      $editeurs = [];
+      $queryEditeur = "SELECT id, nom FROM editeur ORDER BY nom ASC";
+      $resultEditeur = $connexion->query($queryEditeur);
+      if ($resultEditeur) {
+          while ($row = $resultEditeur->fetch()) {
+              $editeurs[] = $row;
+          }
+      }
+
+      // Récupérer les genres
+      $genres = [];
+      $queryGenre = "SELECT id, libelle FROM genre ORDER BY libelle ASC";
+      $resultGenre = $connexion->query($queryGenre);
+      if ($resultGenre) {
+          while ($row = $resultGenre->fetch()) {
+              $genres[] = $row;
+          }
+      }
+  ?>
   <section id = "GestM">
         
         <div class="formM1">
-            <form  method="POST" name="formAjoutNews" action="ajoutNews.php">
+            <form  method="POST" name="formAjoutJeux" action="./lib/AjoutJeux.php">
                 <fieldset style="min-height:100px;">
                     <div class="formClub">
                         <!-- <label class="titre_1" for="">Formulaire d'ajout d'un membres</label><br> -->
-                        <legend><b> Formulaire d'ajout d'une actualitée </b> </legend> <br>
+                        <legend><b> Formulaire d'ajout Jeux </b> </legend> <br>
     
                         <!-- <input type = "hidden" name = "idNews"  placeholder="id" required></p> -->
+                        <p>Titre du jeux : <br><input type = "text" name = "titre"  maxlength="50" placeholder="ex: COD" required ></p><br>
+                        <!-- <p>Photos du jeux : <br></p>
+                        <div class="AjoutFichier">
+                          <form action="profil.php" method="POST" enctype="multipart/form-data">
+                              <label for="file">Fichier</label>
+                              <input type="file" name="file">
+                              <button type="submit">Enregistrer</button>
+                          </form>
+                        </div> -->
     
-                        <p>Photos de l'actualitée : <br><input type = "text" name = "photosNews" maxlength="50" placeholder="ex: photo.png" ></p><br>
+                        <!-- <p>Photos du jeux : <br><input type = "text" name = "photosNews" maxlength="50" placeholder="ex: photo.png" ></p><br> -->
     
-                        <p>Descriptions de l'actualitée : <br><input type = "text" name = "descriptionsNews" maxlength="300"  required></p><br>
+                        <p>Descriptions du jeux : <br><input type = "text" name = "description" maxlength="300"  required></p><br>
     
-                        <p>L'auteur : <br><input type = "text" name = "auteurNews"  maxlength="50" placeholder="ex: Florida BARRIA" required ></p><br>
+                        <!-- <p>Éditeur : <br><input type = "text" name = "auteurNews"  maxlength="50" placeholder="ex: Ubisoft" required ></p><br> -->
+                        <!-- <p>Éditeur : <br><select name="" id="" name = "idEditeur"  maxlength="50" placeholder="ex: Romance" required><option value=""></option></select></p><br> -->
+                        
+                        <!-- <p>Genre : <br><select name="" id="" name = "idGenre"  maxlength="50" placeholder="ex: Romance" required><option value=""></option></select></p><br> -->
+                        
+                        <!-- <p>Tarif : <br><input type = "text" name = "auteurNews"  maxlength="50" placeholder="ex: 33" required >€</p><br> -->
+                        <p>Éditeur : <br>
+                        <select name="idEditeur" required>
+                            <option value="">Sélectionnez un éditeur</option>
+                            <?php foreach ($editeurs as $editeur): ?>
+                                <option value="<?= htmlspecialchars($editeur['id']); ?>"><?= htmlspecialchars($editeur['nom']); ?></option>
+                            <?php endforeach; ?>
+                        </select></p><br>
+                        
+                        <p>Genre : <br>
+                        <select name="idGenre" required>
+                            <option value="">Sélectionnez un genre</option>
+                            <?php foreach ($genres as $genre): ?>
+                                <option value="<?= htmlspecialchars($genre['id']); ?>"><?= htmlspecialchars($genre['libelle']); ?></option>
+                            <?php endforeach; ?>
+                        </select></p><br>
     
-                        <p>Date de l'actualitée : <br><input type = "date" name = "dateNews" required></p><br>
+                        <p>Date de sortie : <br><input type = "date" name = "dateDeSortie" required></p><br>
     
-                        <button type = "submit" class="button-A" role="button"><span class="text">Ajout d'une actualitée !</span><span>Ajouter!</span></button>
+                        <button type = "submit" class="button-A" role="button"><span class="text">Ajout d'un Jeux !</span><span>Ajouter!</span></button>
                         <!-- <input class="button" type="submit"  name="Connecter" value="Ajouter un membre !" > -->
                     </div>
                 </fieldset>
