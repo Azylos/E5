@@ -72,7 +72,9 @@ if(isset($_GET['id'])) {
       AddWishlist($id,$jeu_id);
     }
 
-    $InWishlist = InWishlist($id,$jeu_id);
+    if(isset($id)){
+      $InWishlist = InWishlist($id,$jeu_id);
+    }
 
     // Requête SQL pour récupérer les détails du jeu depuis la vue vue_jeux_details
     $sql2 = "SELECT * FROM vue_jeux_details WHERE JeuxID = $jeu_id";
@@ -114,16 +116,27 @@ if(isset($_GET['id'])) {
                         <h4><?=$titre?></h4>
                         <span class="price"><em></em><?=$tarif?>€</span>
                         <br>
+
                         <form action="#" method="post" id="wishlistForm">
-                          <?php if($InWishlist): ?>
-                              <button type="button" onclick="RemoveFromWishlist(<?=$jeu_id?>)">
-                                <i class="fa-solid fa-heart"></i> Dans votre liste de souhaits
-                              </button>
-                          <?php else: ?>
-                            <button type="button" onclick="addToWishlist(<?=$jeu_id?>)">
-                              <i class="fa fa-shopping-bag"></i> Ajouter dans votre liste de souhaits
-                            </button>
-                          <?php endif; ?>
+                            <?php 
+                            if(isset($id)) {
+                                if($InWishlist): ?>
+                                    <button type="button" onclick="RemoveFromWishlist(<?=$jeu_id?>)">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                <?php else: ?>
+                                    <button type="button" onclick="addToWishlist(<?=$jeu_id?>)">
+                                        <i class="fa fa-shopping-bag"></i>
+                                    </button>
+                                <?php 
+                                endif; 
+                            } else { ?>
+                              <a href="profil/logIn.php">
+                                <button type="button">
+                                    <i class="fa fa-shopping-bag"></i>
+                                </button>
+                              </a>
+                            <?php } ?>
                         </form>
                         <ul>
                             <li><span>Genre:</span> <a href="#"><?=$genre?></a></li>
@@ -272,9 +285,9 @@ $connexion = null;
       var form = document.getElementById('wishlistForm');
       form.innerHTML = inWishlist ?
           '<button type="button" onclick="RemoveFromWishlist(' + idJeux + ')">' +
-          '<i class="fa-solid fa-heart"></i> Dans votre liste de souhaits</button>' :
+          '<i class="fa-solid fa-heart"></i></button>' :
           '<button type="button" onclick="addToWishlist(' + idJeux + ')">' +
-          '<i class="fa fa-shopping-bag"></i> Ajouter dans votre liste de souhaits</button>';
+          '<i class="fa fa-shopping-bag"></i></button>';
     }
 
   </script>

@@ -113,7 +113,9 @@ https://templatemo.com/tm-589-lugx-gaming
           if ($jeux->rowCount() > 0) {
             // Afficher les jeux avec les détails de l'éditeur, du genre et du prix
             while($row = $jeux->fetch(PDO::FETCH_ASSOC)) {
+              if(isset($id)){
                 $InWishlist = InWishlist($id,$row['JeuxID']);
+              }
                 echo '<div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">';
                 echo '<div class="item">';
                 echo '<div class="thumb">';
@@ -123,10 +125,14 @@ https://templatemo.com/tm-589-lugx-gaming
                 echo '<div class="down-content">';
                 echo '<span class="category">'.$row['Genre'].'</span>';
                 echo '<h4>'.$row['Titre'].'</h4>';
-                if($InWishlist){
-                  echo '<a href="#" class="remove-wishlist" data-jeuxid="' . $row['JeuxID'] . '"><i class="fa-solid fa-heart"></i></a>';
+                if(isset($id)){
+                  if($InWishlist){
+                    echo '<a href="#" class="remove-wishlist" data-jeuxid="' . $row['JeuxID'] . '"><i class="fa-solid fa-heart"></i></a>';
+                  } else {
+                    echo '<a href="#" class="add-wishlist" data-jeuxid="' . $row['JeuxID'] . '"><i class="fa fa-shopping-bag"></i></a>';
+                  }
                 } else {
-                  echo '<a href="#" class="add-wishlist" data-jeuxid="' . $row['JeuxID'] . '"><i class="fa fa-shopping-bag"></i></a>';
+                  echo '<a href="profil/logIn.php"><i class="fa fa-shopping-bag"></i></a>';
                 }
                 echo '</div>';
                 echo '</div>';
