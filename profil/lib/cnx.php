@@ -29,12 +29,18 @@
                     'pseudo' => $userConnect['pseudo'],
                     'imgProfil' => $userConnect['imgProfil'],
                 ];
+                if (empty($_SESSION['admin']['imgProfil'])){
+                    $_SESSION['admin']['imgProfil'] = "defaut.png";
+                }
             } else {
                 $_SESSION['user'] = [
                     'id' => $userConnect['id'],
                     'pseudo' => $userConnect['pseudo'],
                     'imgProfil' => $userConnect['imgProfil'],
                 ];
+                if (empty($_SESSION['user']['imgProfil'])){
+                    $_SESSION['user']['imgProfil'] = "defaut.png";
+                }
             }
 
             if(isset($_SESSION["admin"])) {

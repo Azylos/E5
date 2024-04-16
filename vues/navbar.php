@@ -5,9 +5,6 @@
     if(isset($_SESSION['user'])){
         $img = $_SESSION['user']['imgProfil'];
     }
-    if(empty($img)){
-        $img = "defaut.png";
-    }
     // Récupérer l'URI de la page actuelle
     $currentURI = $_SERVER['REQUEST_URI'];
 

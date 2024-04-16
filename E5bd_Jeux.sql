@@ -4,7 +4,7 @@
 DROP TABLE IF EXISTS `editeur`;
 
 CREATE TABLE `editeur` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nom` char(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -12,7 +12,7 @@ CREATE TABLE `editeur` (
 DROP TABLE IF EXISTS `genre`;
 
 CREATE TABLE `genre` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `libelle` char(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -20,7 +20,7 @@ CREATE TABLE `genre` (
 DROP TABLE IF EXISTS `jeux`;
 
 CREATE TABLE `jeux` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `IdEditeur` int NOT NULL,
   `IdGenre` int NOT NULL,
   `titre` char(32) DEFAULT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `tarif` (
 DROP TABLE IF EXISTS `utilisateurs`;
 
 CREATE TABLE `utilisateurs` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `pseudo` char(32) DEFAULT NULL,
   `login` char(32) DEFAULT NULL,
   `mdp` char(32) DEFAULT NULL,
@@ -85,14 +85,14 @@ CREATE TABLE `vouloir` (
 /* -------------------------------------------------------------------------------
                                         Jeu d'essaie
   -------------------------------------------------------------------------------------*/
-INSERT INTO `editeur` 
+INSERT INTO `editeur`
 VALUES (1,'Ubisoft'),
   (2,'Electronic Arts'),
   (3,'Activision'),
   (4,'Square Enix'),
   (5,'Nintendo');
 
-INSERT INTO `genre` 
+INSERT INTO `genre`
 VALUES (1,'Action'),
   (2,'Aventure'),
   (3,'Stratégie'),
@@ -100,16 +100,16 @@ VALUES (1,'Action'),
   (5,'Sport');
 
 INSERT INTO `jeux` VALUES 
-  (1, 1, 1, "Assassin's Creed Valhalla", "Explorez l'âge des Vikings dans ce jeu d'action-aventure.", "2020-11-10"),
-  (2, 2, 4, "Mass Effect: Legendary Edition", "Revivez l'épopée spatiale de Shepard dans cette collection remasterisée.", "2021-05-14"),
-  (3, 3, 3, "Call of Duty: Modern Warfare", "Plongez dans l'intensité des combats modernes dans ce jeu de tir.", "2019-10-25"),
-  (4, 4, 4, "Final Fantasy VII Remake", "Redécouvrez le chef-d'œuvre RPG de Square Enix avec des graphismes époustouflants.", "2020-04-10"),
-  (5, 5, 2, "The Legend of Zelda: Breath of the Wild", "Explorez le vaste royaume d'Hyrule dans cette aventure épique.", "2017-03-03"),
-  (6, 1, 1, "Far Cry 6", "Affrontez un dictateur impitoyable dans un pays insulaire tropical.", "2021-10-07"),
-  (7, 2, 4, "Dragon Age: Inquisition", "Partez en quête d'aventures dans ce RPG fantastique de BioWare.", "2014-11-18"),
-  (8, 3, 1, "Call of Duty: Warzone", "Plongez dans des combats battle royale intenses avec des centaines de joueurs.", "2020-03-10"),
-  (9, 4, 2, "Kingdom Hearts III", "Rejoignez Sora et ses amis dans cette aventure magique qui mélange Disney et Final Fantasy.", "2019-01-29"),
-  (10, 5, 5, "Mario Kart 8 Deluxe", "Affrontez vos amis dans des courses endiablées avec vos personnages Nintendo préférés.", "2017-04-28");
+  (1, 1, 1, "Assassin's Creed Valhalla", "Explorez l'âge des Vikings dans ce jeu d'action-aventure.", "2020-11-10","trending-01.jpg"),
+  (2, 2, 4, "Mass Effect: Legendary Edition", "Revivez l'épopée spatiale de Shepard dans cette collection remasterisée.", "2021-05-14","trending-02.jpg"),
+  (3, 3, 3, "Call of Duty: Modern Warfare", "Plongez dans l'intensité des combats modernes dans ce jeu de tir.", "2019-10-25","single-game.jpg"),
+  (4, 4, 4, "Final Fantasy VII Remake", "Redécouvrez le chef-d'œuvre RPG de Square Enix avec des graphismes époustouflants.", "2020-04-10","trending-03.jpg"),
+  (5, 5, 2, "The Legend of Zelda: Breath of the Wild", "Explorez le vaste royaume d'Hyrule dans cette aventure épique.", "2017-03-03","trending-04.jpg"),
+  (6, 1, 1, "Far Cry 6", "Affrontez un dictateur impitoyable dans un pays insulaire tropical.", "2021-10-07","top-game-01.jpg"),
+  (7, 2, 4, "Dragon Age: Inquisition", "Partez en quête d'aventures dans ce RPG fantastique de BioWare.", "2014-11-18","top-game-03.jpg"),
+  (8, 3, 1, "Call of Duty: Warzone", "Plongez dans des combats battle royale intenses avec des centaines de joueurs.", "2020-03-10","single-game.jpg"),
+  (9, 4, 2, "Kingdom Hearts III", "Rejoignez Sora et ses amis dans cette aventure magique qui mélange Disney et Final Fantasy.", "2019-01-29", "kingdom-hearts-iii-jeux-banniere.jpg"),
+  (10, 5, 5, "Mario Kart 8 Deluxe", "Affrontez vos amis dans des courses endiablées avec vos personnages Nintendo préférés.", "2017-04-28","top-game-05.jpg");
 
 INSERT INTO `tarif` 
 VALUES (1,'2020-11-10',NULL,59.99),
@@ -124,8 +124,8 @@ VALUES (1,'2020-11-10',NULL,59.99),
   (10,'2017-04-28',NULL,59.99);
 
 INSERT INTO `utilisateurs` 
-VALUES (1,'admin','admin123','password',1),
-  (2,'user1','user1','password',0);
+VALUES (1,'admin','admin123','password','660a8a61375251.89089958.png',1),
+  (2,'user1','user1','password','6609aeeb265191.27249654.png',0);
 
   /* -------------------------------------------------------------------------------
                                         Utilisateur

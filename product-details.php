@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php 
+  session_start(); 
+  require_once("./database/requeteDB.php");
+
+  if(isset($_SESSION['admin'])) {
+      $id = $_SESSION['admin']['id'];
+  } elseif(isset($_SESSION['user'])) {
+      $id = $_SESSION['user']['id'];
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,51 +59,23 @@ https://templatemo.com/tm-589-lugx-gaming
   ?>
   <!-- ***** Header Area End ***** -->
 
-  <!-- <div class="page-heading header-text">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h3>Modern Warfare® II</h3>
-          <span class="breadcrumb"><a href="#">Home</a>  >  <a href="#">Shop</a>  >  Assasin Creed</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="single-product section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="left-image">
-            <img src="assets/images/single-game.jpg" alt="">
-          </div>
-        </div>
-        <div class="col-lg-6 align-self-center">
-          <h4>Call of Duty®: Modern Warfare® II</h4>
-          <span class="price"><em>$28</em> $22</span>
-          <br>
-          <form id="qty" action="#">
-  
-            <button type="submit"><i class="fa fa-shopping-bag"></i> Wishlist</button>
-          </form>
-          <ul>
-            <li><span>Genre:</span> <a href="#">Action</a>, <a href="#">Team</a>, <a href="#">Single</a></li>
-            <li><span>Editeur:</span> <a href="#">test</a></li>
-          </ul>
-        </div>
-  
-        <div class="col-lg-12">
-          <div class="sep"></div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 <?php
-require_once("./database/connexion.php");
   // Vérifier si l'identifiant du jeu est passé dans l'URL
 if(isset($_GET['id'])) {
     $jeu_id = $_GET['id'];
-    
+
+    if(isset($_POST['deleteWishlist'])) {
+      DeleteWishlist($id,$jeu_id);
+    }
+
+    if(isset($_POST['addWishlist'])) {
+      AddWishlist($id,$jeu_id);
+    }
+
+    if(isset($id)){
+      $InWishlist = InWishlist($id,$jeu_id);
+    }
+
     // Requête SQL pour récupérer les détails du jeu depuis la vue vue_jeux_details
     $sql2 = "SELECT * FROM vue_jeux_details WHERE JeuxID = $jeu_id";
     $result = $connexion->query($sql2);
@@ -111,47 +92,67 @@ if(isset($_GET['id'])) {
         $tarif = $row['Tarif'];
         $date_debut_tarif = $row['dateDebutTarif'];
         $date_fin_tarif = $row['dateFinTarif'];
-        // Structure HTML pour la page de détails du produit
-        echo '<div class="page-heading header-text">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h3>'.$titre.'</h3>
-                            <span class="breadcrumb"><a href="./">Home</a>  >  <a href="#">Shop</a>  >  '.$titre.'</span>
-                        </div>
+        ?>
+        <div class="page-heading header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3><?=$titre?></h3>
+                        <span class="breadcrumb"><a href="./">Home</a>  >  <a href="#">Shop</a>  > <?=$titre?></span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="single-product section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="left-image">
-                                <img src="assets/images/'.$image.'" alt="'.$titre.'">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 align-self-center">
-                            <h4>'.$titre.'</h4>
-                            <span class="price"><em></em>'.$tarif.'€</span>
-                            <br>
-                            <form id="qty" action="#">
-                                <button type="submit"><i class="fa fa-shopping-bag"></i> Wishlist</button>
-                            </form>
-                            <ul>
-                                <li><span>Genre:</span> <a href="#">'.$genre.'</a></li>
-                                <li><span>Editeur:</span> <a href="#">'.$editeur.'</a></li>
-                                <li><span>Date de sortie:</span> '.$date_de_sortie.'</li>
-                                <!-- Ajoutez dautres détails selon vos besoins -->
-                            </ul>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="sep"></div>
+        <div class="single-product section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="left-image">
+                            <img src="assets/images/<?=$image?>" alt="<?=$titre?>">
                         </div>
                     </div>
+                    <div class="col-lg-6 align-self-center">
+                        <h4><?=$titre?></h4>
+                        <span class="price"><em></em><?=$tarif?>€</span>
+                        <br>
+
+                        <form action="#" method="post" id="wishlistForm">
+                            <?php 
+                            if(isset($id)) {
+                                if($InWishlist): ?>
+                                    <button type="button" onclick="RemoveFromWishlist(<?=$jeu_id?>)">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                <?php else: ?>
+                                    <button type="button" onclick="addToWishlist(<?=$jeu_id?>)">
+                                        <i class="fa fa-shopping-bag"></i>
+                                    </button>
+                                <?php 
+                                endif; 
+                            } else { ?>
+                              <a href="profil/logIn.php">
+                                <button type="button">
+                                    <i class="fa fa-shopping-bag"></i>
+                                </button>
+                              </a>
+                            <?php } ?>
+                        </form>
+                        <ul>
+                            <li><span>Genre:</span> <a href="#"><?=$genre?></a></li>
+                            <li><span>Editeur:</span> <a href="#"><?=$editeur?></a></li>
+                            <li><span>Date de sortie:</span> <?=$date_de_sortie?></li>
+                            <!-- Ajoutez dautres détails selon vos besoins -->
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="sep"></div>
+                    </div>
                 </div>
-            </div>';
+            </div>
+        </div>
+        <?php
     } else {
         echo "Aucun jeu trouvé avec cet identifiant.";
     }
@@ -173,7 +174,6 @@ $connexion = null;
                   <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
                   </li>
-
                 </ul>
               </div>              
               <div class="tab-content" id="myTabContent">
@@ -181,11 +181,7 @@ $connexion = null;
                   <?php
                     echo "<p>".$description."</p>"
                   ?>
-                  <!-- <p>You can search for more templates on Google Search using keywords such as "templatemo digital marketing", "templatemo one-page", "templatemo gallery", etc. Please tell your friends about our website. If you need a variety of HTML templates, you may visit Tooplate and Too CSS websites.</p>
-                  <br>
-                  <p>Coloring book air plant shabby chic, crucifix normcore raclette cred swag artisan activated charcoal. PBR&B fanny pack pok pok gentrify truffaut kitsch helvetica jean shorts edison bulb poutine next level humblebrag la croix adaptogen. Hashtag poke literally locavore, beard marfa kogi bruh artisan succulents seitan tonx waistcoat chambray taxidermy. Same cred meggings 3 wolf moon lomo irony cray hell of bitters asymmetrical gluten-free art party raw denim chillwave tousled try-hard succulents street art.</p> -->
                 </div>
-
               </div>
             </div>
           </div>
@@ -264,6 +260,36 @@ $connexion = null;
   <script src="assets/js/owl-carousel.js"></script>
   <script src="assets/js/counter.js"></script>
   <script src="assets/js/custom.js"></script>
+  <script>
+    function addToWishlist(idJeux) {
+      // Création d'une nouvelle instance de XMLHttpRequest
+      var xhr = new XMLHttpRequest();
+      // Ouverture de la requête POST vers product-details.php avec l'identifiant du jeu dans l'URL
+      xhr.open('POST', 'product-details.php?id=' + idJeux, true);
+      // Définition de l'en-tête de la requête pour spécifier le type de contenu
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      // Envoi de la requête avec les données à traiter côté serveur
+      xhr.send('idJeux=' + idJeux + '&addWishlist=true');
+      updateWishlistButton(true, idJeux); // Mettre à jour le bouton après l'ajout
+    }
 
+    function RemoveFromWishlist(idJeux) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'product-details.php?id=' + idJeux, true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send('idJeux=' + idJeux + '&deleteWishlist=true');
+      updateWishlistButton(false, idJeux); // Mettre à jour le bouton après la suppression
+    }
+
+    function updateWishlistButton(inWishlist, idJeux) {
+      var form = document.getElementById('wishlistForm');
+      form.innerHTML = inWishlist ?
+          '<button type="button" onclick="RemoveFromWishlist(' + idJeux + ')">' +
+          '<i class="fa-solid fa-heart"></i></button>' :
+          '<button type="button" onclick="addToWishlist(' + idJeux + ')">' +
+          '<i class="fa fa-shopping-bag"></i></button>';
+    }
+
+  </script>
   </body>
 </html>
