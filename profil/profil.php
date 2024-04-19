@@ -50,7 +50,7 @@
     <br>
     <br>
     <br>
-    <div>
+    <div class="AjoutFichier">
         <form action="profil.php" method="POST" enctype="multipart/form-data">
             <label for="file">Fichier</label>
             <input type="file" name="file">

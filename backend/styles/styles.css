@@ -11,17 +11,31 @@
     list-style: none;
 }
 
+.titre_back{
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
 
+  
 
+.titre_back h2{
+  color: #008af8;
+}
 
+.background-header {
+  background-color: #0070f8f9 !important;
+}
 #GestM {
     margin: 30px 50px;
     min-height: 100px;
     display: flex;
     flex-direction: row;
-    border: 1px solid rgb(73, 82, 2);
-    box-shadow: 0 0 0 black;
-    background: rgba(113, 104, 21, 0.323);
+    /* border: 1px solid rgba(73, 82, 2, 0); */
+    /* box-shadow: 0 0 0 black; */
+    /* background: rgba(238, 233, 193, 0.323); */
     
 }
 
@@ -129,8 +143,8 @@ form{
 
 fieldset {
     font-family: sans-serif;
-    border: 5px solid #95931f;
-    background: #ddd;
+    border: 1px solid #008af8;
+    background: #f1f1f1c5;
     border-radius: 5px;
     padding: 15px;
 }
@@ -142,16 +156,25 @@ fieldset legend {
     font-size: 32px;
     border-radius: 5px;
     box-shadow: 0 0 0 5px #ddd;
-    margin-left: 20px;
+    
 }
 
 input, select{
     padding: 0 0 0 10px;
     border: none;
-    height: 20px;
+    /* height: 20px; */
     width:250px;
     border-radius: 10px;
     box-shadow:2px 1px 2px #C0C0C0 inset;
+}
+
+.AjoutFichier {
+  height: 50px;
+  width: 100%;
+}
+
+select {
+  height: 30px;
 }
 
 /* Début Button */

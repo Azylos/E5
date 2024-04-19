@@ -95,7 +95,8 @@ https://templatemo.com/tm-589-lugx-gaming
     <div class="container">
       <ul class="trending-filter">
         <li>
-          <a class="is_active" href="#!" data-filter="*">Show All</a>
+          <a class="is_active" href="#!" data-filter="*">Tout Les Jeux</a>
+          <!-- <a class="is_active" href="#!" data-filter="*">Romance</a> -->
         </li>
         <!-- <li>
           <a href="#!" data-filter=".adv">Adventure</a>
@@ -145,11 +146,15 @@ https://templatemo.com/tm-589-lugx-gaming
           ?>
       </div>
       </div>
+
     </div>
   </div>
 
   <?php
-    require_once("./vues/footer.php")
+    require_once("./vues/scrollup.php");
+  ?>
+  <?php
+    require_once("./vues/footer.php");
   ?>
 
   <!-- Scripts -->
@@ -160,6 +165,7 @@ https://templatemo.com/tm-589-lugx-gaming
   <script src="assets/js/owl-carousel.js"></script>
   <script src="assets/js/counter.js"></script>
   <script src="assets/js/custom.js"></script>
+      
   <script>
     $(document).ready(function() {
       $(".section.trending").on("click", ".remove-wishlist", function(event) {

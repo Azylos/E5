@@ -1,9 +1,9 @@
 <?php
     // Connexion à la base de données
     $servername = "localhost";
-    $username = "Rungame_Ad";
-    $password = "12-Soleil&";
-    $dbname = "e5_rungame";
+    $username = "root";
+    $password = "";
+    $dbname = "e5_rungamefinal";
 
 	try {
 		$connexion = new PDO("mysql:host=$servername;dbname=$dbname;charset=UTF8", $username, $password);

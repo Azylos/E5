@@ -285,7 +285,7 @@ Header Style
 */
 
 .background-header {
-  background-color: #0071f8 !important;
+  background-color: #0070f800 !important;
   border-radius: 0px 0px 25px 25px;
   height: 80px!important;
   position: fixed!important;
@@ -1728,4 +1728,9 @@ body {
 
 @media (max-width: 1200px) {
   
+}
+
+.AjoutFichier{
+  height: 100vh;
+  width: 100%;
 }
