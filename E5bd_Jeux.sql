@@ -23,7 +23,7 @@ CREATE TABLE `jeux` (
   `id` int NOT NULL AUTO_INCREMENT,
   `IdEditeur` int NOT NULL,
   `IdGenre` int NOT NULL,
-  `titre` char(32) DEFAULT NULL,
+  `titre` char(255) DEFAULT NULL,
   `description` char(255) DEFAULT NULL,
   `dateDeSortie` date DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
