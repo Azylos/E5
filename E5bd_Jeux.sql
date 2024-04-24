@@ -23,7 +23,7 @@ CREATE TABLE `jeux` (
   `id` int NOT NULL AUTO_INCREMENT,
   `IdEditeur` int NOT NULL,
   `IdGenre` int NOT NULL,
-  `titre` char(32) DEFAULT NULL,
+  `titre` char(255) DEFAULT NULL,
   `description` char(255) DEFAULT NULL,
   `dateDeSortie` date DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
@@ -133,3 +133,30 @@ VALUES (1,'admin','admin123','password','660a8a61375251.89089958.png',1),
 
 create user 'Rungame_Ad'@'%' identified by '12-Soleil&';
 grant select, update, insert, delete on e5_rungame.* to 'Rungame_Ad'@'%'; 
+
+
+/* -------------------------------------------------------------------------------
+                                      Trigger
+-------------------------------------------------------------------------------------*/
+DELIMITER //
+
+CREATE TRIGGER SuppJeux
+BEFORE DELETE
+ON jeux
+FOR EACH ROW
+BEGIN
+    -- Vérifier si des entrées existent dans la table vouloir pour le jeu qui va être supprimé
+    DECLARE nbJeuxSouhaiter INT;
+    SELECT COUNT(*) INTO nbJeuxSouhaiter FROM vouloir WHERE IdJeux = OLD.id;
+    
+    -- Si des entrées existent, les supprimer
+    IF nbJeuxSouhaiter > 0 THEN
+        DELETE FROM vouloir WHERE IdJeux = OLD.id;
+    END IF;
+    
+    -- Supprimer le tarif associé au jeu qui va être supprimé
+    DELETE FROM tarif WHERE id = OLD.id;
+END//
+
+DELIMITER ;
+
