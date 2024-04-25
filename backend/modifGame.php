@@ -111,12 +111,6 @@ https://templatemo.com/tm-589-lugx-gaming
                         <!-- <p>Photos du jeux : <br><input type = "text" name = "photosNews" maxlength="50" placeholder="ex: photo.png" ></p><br> -->
     
                         <p>Descriptions du jeux : <br><input type = "text" name = "description" maxlength="300"  required></p><br>
-    
-                        <!-- <p>Éditeur : <br><input type = "text" name = "auteurNews"  maxlength="50" placeholder="ex: Ubisoft" required ></p><br> -->
-                        <!-- <p>Éditeur : <br><select name="" id="" name = "idEditeur"  maxlength="50" placeholder="ex: Romance" required><option value=""></option></select></p><br> -->
-                        
-                        <!-- <p>Genre : <br><select name="" id="" name = "idGenre"  maxlength="50" placeholder="ex: Romance" required><option value=""></option></select></p><br> -->
-                        
                         
                         <p>Éditeur : <br>
                         <select name="idEditeur" required>

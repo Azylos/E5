@@ -70,8 +70,15 @@
     
     function AddGame($idEditeur, $idGenre, $titre, $description, $dateDeSortie, $image) {
         global $connexion;
-        $req = "INSERT INTO jeux (IdEditeur, IdGenre, titre, description, dateDeSortie, image) VALUES ($idEditeur, $idGenre, '$titre', '$description', '$dateDeSortie', '$image')";
-        $result = $connexion->exec($req);
+        $req = "INSERT INTO jeux (IdEditeur, IdGenre, titre, description, dateDeSortie, image) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $connexion->prepare($req);
+        $stmt->bindParam(1, $idEditeur, PDO::PARAM_INT);
+        $stmt->bindParam(2, $idGenre, PDO::PARAM_INT);
+        $stmt->bindParam(3, $titre, PDO::PARAM_STR);
+        $stmt->bindParam(4, $description, PDO::PARAM_STR);
+        $stmt->bindParam(5, $dateDeSortie, PDO::PARAM_STR);
+        $stmt->bindParam(6, $image, PDO::PARAM_STR);
+        $result = $stmt->execute();
         if ($result) {
             // Récupérer l'ID du dernier jeu inséré
             $lastInsertedId = $connexion->lastInsertId();
@@ -80,7 +87,6 @@
             return false;
         }
     }
-
     
     function UpdateGame($id, $idEditeur, $idGenre, $titre, $description, $dateDeSortie, $image) {
         global $connexion;

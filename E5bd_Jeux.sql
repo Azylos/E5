@@ -132,7 +132,7 @@ VALUES (1,'admin','admin123','password','660a8a61375251.89089958.png',1),
   -------------------------------------------------------------------------------------*/
 
 create user 'Rungame_Ad'@'%' identified by '12-Soleil&';
-grant select, update, insert, delete on e5_rungame.* to 'Rungame_Ad'@'%'; 
+grant select, update, insert, execute, delete on e5_rungame.* to 'Rungame_Ad'@'%'; 
 
 
 /* -------------------------------------------------------------------------------
