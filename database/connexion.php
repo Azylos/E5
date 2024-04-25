@@ -1,7 +1,7 @@
 <?php
     // Connexion à la base de données
     $servername = "localhost";
-    $username = "e5_rungame";
+    $username = "Rungame_Ad";
     $password = "12-Soleil&";
     $dbname = "e5_rungame";
 
