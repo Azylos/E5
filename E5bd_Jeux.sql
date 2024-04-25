@@ -24,7 +24,7 @@ CREATE TABLE `jeux` (
   `IdEditeur` int NOT NULL,
   `IdGenre` int NOT NULL,
   `titre` char(255) DEFAULT NULL,
-  `description` char(255) DEFAULT NULL,
+  `description` char(500) DEFAULT NULL,
   `dateDeSortie` date DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
