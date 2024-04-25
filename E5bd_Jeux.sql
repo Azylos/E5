@@ -160,3 +160,41 @@ END//
 
 DELIMITER ;
 
+/* -------------------------------------------------------------------------------
+                                      Procédure
+-------------------------------------------------------------------------------------*/
+
+DELIMITER //
+CREATE PROCEDURE ModifierJeu (
+    IN p_idJeu INT,
+    IN p_titre VARCHAR(255),
+    IN p_description TEXT,
+    IN p_dateDeSortie DATE,
+    IN p_idEditeur INT,
+    IN p_idGenre INT,
+    IN p_tarif DECIMAL(10,2)
+)
+BEGIN
+    -- Mettre à jour le titre, la description et la date de sortie du jeu
+    UPDATE jeux
+    SET 
+        titre = p_titre,
+        description = p_description,
+        dateDeSortie = p_dateDeSortie,
+        IdEditeur = p_idEditeur,
+        IdGenre = p_idGenre
+    WHERE id = p_idJeu;
+
+    -- Vérifier si un tarif existe pour le jeu
+    IF EXISTS (SELECT 1 FROM tarif WHERE id = p_idJeu) THEN
+        -- Mettre à jour le tarif existant
+        UPDATE tarif
+        SET tarif = p_tarif
+        WHERE id = p_idJeu;
+    ELSE
+        -- Ajouter un nouveau tarif pour le jeu
+        INSERT INTO tarif (id, tarif)
+        VALUES (p_idJeu, p_tarif);
+    END IF;
+END //
+DELIMITER ;

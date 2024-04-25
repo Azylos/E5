@@ -72,7 +72,13 @@
         global $connexion;
         $req = "INSERT INTO jeux (IdEditeur, IdGenre, titre, description, dateDeSortie, image) VALUES ($idEditeur, $idGenre, '$titre', '$description', '$dateDeSortie', '$image')";
         $result = $connexion->exec($req);
-        return $result;
+        if ($result) {
+            // Récupérer l'ID du dernier jeu inséré
+            $lastInsertedId = $connexion->lastInsertId();
+            return $lastInsertedId;
+        } else {
+            return false;
+        }
     }
 
     
@@ -98,9 +104,9 @@
         return $result;
     }
     
-    function AddPrice($id, $dateDebut, $dateFin, $tarif) {
+    function AddPrice($id, $tarif) {
         global $connexion;
-        $req = "INSERT INTO tarif (id, dateDebut, dateFin, tarif) VALUES ($id, '$dateDebut', '$dateFin', $tarif)";
+        $req = "INSERT INTO tarif (id, dateDebut, dateFin, tarif) VALUES ($id, CURDATE(), NULL, $tarif)";
         $result = $connexion->exec($req);
         return $result;
     }

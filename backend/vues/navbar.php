@@ -19,6 +19,7 @@
                         <li><a href="../index.php" class="active">Voir la Boutique</a></li>
                         <li><a href="index.php" class="active">Accueil BackOffice</a></li>
                         <li><a href="newGame.php" class="active">Ajouter un jeu</a></li>
+                        <li><a href="listeJeux.php" class="active">Liste des Jeux</a></li>
                             <div class="user">
                                     <div class="avatar">
                                         <img src="<?= '../profil/img/'.$img?>">

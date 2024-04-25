@@ -21,6 +21,7 @@
         $idEditeur = $_POST["idEditeur"];
         $idGenre = $_POST["idGenre"];
         $dateDeSortie = $_POST["dateDeSortie"];
+        $tarifJeux = $_POST["tarifJeux"];
 
         // Liste des images disponibles
         $listeImages = array(
@@ -33,11 +34,18 @@
         $image = choisirImageAleatoire($listeImages);
 
         // Appel de la fonction AddGame pour insérer les données
-        $result = AddGame($idEditeur, $idGenre, $titre, $description, $dateDeSortie, $image);
+        $jeuId = AddGame($idEditeur, $idGenre, $titre, $description, $dateDeSortie, $image);
 
-        // Vérification du résultat de l'insertion
-        if ($result) {
+        // Vérification du résultat de l'insertion du jeu
+        if ($jeuId) {
             echo "Le jeu a été ajouté avec succès.";
+
+            // Ajout du tarif associé au jeu
+            if (AddPrice($jeuId, $tarifJeux)) {
+                echo "Le tarif a été ajouté avec succès.";
+            } else {
+                echo "Erreur lors de l'ajout du tarif.";
+            }
         } else {
             echo "Une erreur s'est produite lors de l'ajout du jeu.";
         }

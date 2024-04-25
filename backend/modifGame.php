@@ -53,7 +53,7 @@ https://templatemo.com/tm-589-lugx-gaming
     <?php
       // Connexion à la base de données
       require_once("../database/connexion.php");
-
+      $idJeu = $_GET['id'];
       
 
       // Récupérer les éditeurs
@@ -75,18 +75,30 @@ https://templatemo.com/tm-589-lugx-gaming
               $genres[] = $row;
           }
       }
+
+      $titre = [];
+      $queryTitre = "SELECT titre FROM jeux WHERE id = $idJeu";
+      $resultTitre = $connexion->query($queryTitre);
+      if ($resultTitre) {
+          while ($row = $resultTitre->fetch(PDO::FETCH_ASSOC)) {
+              $titre[] = $row['titre'];
+          }
+      }
   ?>
   <section id = "GestM">
         
         <div class="formM1">
-            <form  method="POST" name="formAjoutJeux" action="./lib/AjoutJeux.php">
+            <form  method="POST" name="formAjoutJeux" action="./lib/ModifJeux.php">
                 <fieldset style="min-height:100px;">
                     <div class="formClub">
                         <!-- <label class="titre_1" for="">Formulaire d'ajout d'un membres</label><br> -->
-                        <legend><b> Formulaire d'ajout Jeux </b> </legend> <br>
+                        <legend><b> Formulaire modification du Jeux :</b> </legend> <br>
+
+                        <h3><b> <?php foreach ($titre as $titreJeu) {echo $titreJeu;} ?> </b></h3>
     
-                        <!-- <input type = "hidden" name = "idNews"  placeholder="id" required></p> -->
-                        <p>Titre du jeux : <br><input type = "text" name = "titre"  maxlength="50" placeholder="ex: COD" required ></p><br>
+                        <input type="hidden" name="idJeu" value="<?php echo htmlspecialchars($_GET['id']); ?>">
+
+                        <br><p>Titre du jeux : <br><input type = "text" name = "titre"  maxlength="50" placeholder="ex: COD" required ></p><br>
                         <!-- <p>Photos du jeux : <br></p>
                         <div class="AjoutFichier">
                           <form action="profil.php" method="POST" enctype="multipart/form-data">
@@ -126,7 +138,7 @@ https://templatemo.com/tm-589-lugx-gaming
                         <p>Tarif : <br><input type="number" step="0.01" name="tarifJeux" placeholder="ex: 49.99" required>€</p><br>
 
     
-                        <button type = "submit" class="button-A" role="button"><span class="text">Ajout d'un Jeux !</span><span>Ajouter!</span></button>
+                        <button type = "submit" class="button-A" role="button"><span class="text">Modifier ce Jeux !</span><span>Modifier !</span></button>
                         <!-- <input class="button" type="submit"  name="Connecter" value="Ajouter un membre !" > -->
                     </div>
                 </fieldset>
