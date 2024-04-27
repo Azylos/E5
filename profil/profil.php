@@ -51,7 +51,7 @@
     <br>
     <br>
     <div class="AjoutFichier">
-        <h4>Changer de photo de profil :</h4>
+        <h4>Changer la photo de profil :</h4>
         <br><br>
         <form action="profil.php" method="POST" enctype="multipart/form-data">
             <label for="file">Fichier</label>
