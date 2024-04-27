@@ -50,82 +50,50 @@ https://templatemo.com/tm-589-lugx-gaming
     require_once("vues/navbar.php");
   ?>
   <!-- ***** Header Area End ***** -->
-    <?php
-      // Connexion à la base de données
-      require_once("../database/connexion.php");
+<?php
+  // Connexion à la base de données
+  require_once("../database/connexion.php");
+  require_once("lib/gestionJeux.php");
+  $jeux = ShowGames();
 
-      
+  if ($jeux && $jeux->rowCount() > 0) { ?>
+    <section id='GestM'>
+      <div class='container'>
+        <h2>Liste des Jeux</h2>
+        <div class='table-responsive'>
+          <table class='table table-bordered'>
+            <thead>
+              <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date de Sortie</th>
+                <th>Image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php while ($row = $jeux->fetch(PDO::FETCH_ASSOC)) { ?>
+                  <tr>
+                    <td><?=$row['titre']?></td>
+                    <td><?=$row['description']?></td>
+                    <td><?=$row['dateDeSortie']?></td>
+                    <td><?=$row['image']?></td>
+                    <td>
+                      <a href='./modifGame.php?id=<?=$row['id']?>' class='btn btn-primary btn-sm'>Modifier</a>
+                      <a href="#" onclick="confirmDelete(<?=$row['id']?>, '<?=addslashes($row['titre'])?>');" class='btn btn-danger btn-sm'>Supprimer</a>   <!-- addslashes permet d'échapper guillemets simples -->
+                    </td>
+                  </tr>
+              <?php }?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  <?php } else { ?>
+      <p>Aucun jeu trouvé.</p>
+  <?php }
 
-      // Récupérer les éditeurs
-      $editeurs = [];
-      $queryEditeur = "SELECT id, nom FROM editeur ORDER BY nom ASC";
-      $resultEditeur = $connexion->query($queryEditeur);
-      if ($resultEditeur) {
-          while ($row = $resultEditeur->fetch()) {
-              $editeurs[] = $row;
-          }
-      }
-
-      // Récupérer les genres
-      $genres = [];
-      $queryGenre = "SELECT id, libelle FROM genre ORDER BY libelle ASC";
-      $resultGenre = $connexion->query($queryGenre);
-      if ($resultGenre) {
-          while ($row = $resultGenre->fetch()) {
-              $genres[] = $row;
-          }
-      }
-  ?>
-     <?php
-        require_once("vues/navbar.php");
-
-        // Récupérer les jeux depuis la base de données
-        $query = "SELECT * FROM jeux";
-        $result = $connexion->query($query);
-
-        if ($result && $result->rowCount() > 0) {
-            echo "<section id='GestM'>";
-            echo "<div class='container'>";
-            echo "<h2>Liste des Jeux</h2>";
-            echo "<div class='table-responsive'>";
-            echo "<table class='table table-bordered'>";
-            echo "<thead>";
-            echo "<tr>";
-            echo "<th>ID</th>";
-            echo "<th>Titre</th>";
-            echo "<th>Description</th>";
-            echo "<th>Date de Sortie</th>";
-            echo "<th>Image</th>";
-            echo "<th>Actions</th>";
-            echo "</tr>";
-            echo "</thead>";
-            echo "<tbody>";
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr>";
-                echo "<td>{$row['id']}</td>";
-                echo "<td>{$row['titre']}</td>";
-                echo "<td>{$row['description']}</td>";
-                echo "<td>{$row['dateDeSortie']}</td>";
-                echo "<td>{$row['image']}</td>";
-                echo "<td>";
-                echo "<a href='./modifGame.php?id={$row['id']}' class='btn btn-primary btn-sm'>Modifier</a>";
-                echo "<a href='./lib/supJeux.php?id={$row['id']}' class='btn btn-danger btn-sm'>Supprimer</a>";
-                echo "</td>";
-                echo "</tr>";
-            }
-            echo "</tbody>";
-            echo "</table>";
-            echo "</div>";
-            echo "</div>";
-            echo "</section>";
-        } else {
-            echo "<p>Aucun jeu trouvé.</p>";
-        }
-    ?>
-
-
-  <?php
-    require_once("../vues/footer.php")
+  require_once("../vues/footer.php");
   ?>
 
 
@@ -136,6 +104,14 @@ https://templatemo.com/tm-589-lugx-gaming
   <script src="../assets/js/owl-carousel.js"></script>
   <script src="../assets/js/counter.js"></script>
   <script src="../assets/js/custom.js"></script>
+  <script>
+    function confirmDelete(id, titre) {
+        if (confirm(`Êtes-vous sûr de vouloir supprimer le jeu : ${titre} ?`)) {
+            // Si l'utilisateur confirme, redirige vers le script PHP pour supprimer le jeu
+            window.location.href = "./lib/supJeux.php?id=" + id;
+        }
+    }
+  </script>
 
   </body>
 </html>

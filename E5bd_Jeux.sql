@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `editeur`;
 
 CREATE TABLE `editeur` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nom` char(32) DEFAULT NULL,
+  `nom` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS `genre`;
 
 CREATE TABLE `genre` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `libelle` char(32) DEFAULT NULL,
+  `libelle` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -23,8 +23,8 @@ CREATE TABLE `jeux` (
   `id` int NOT NULL AUTO_INCREMENT,
   `IdEditeur` int NOT NULL,
   `IdGenre` int NOT NULL,
-  `titre` char(255) DEFAULT NULL,
-  `description` char(500) DEFAULT NULL,
+  `titre` varchar(255) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
   `dateDeSortie` date DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -49,9 +49,9 @@ DROP TABLE IF EXISTS `utilisateurs`;
 
 CREATE TABLE `utilisateurs` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `pseudo` char(32) DEFAULT NULL,
-  `login` char(32) DEFAULT NULL,
-  `mdp` char(32) DEFAULT NULL,
+  `pseudo` varchar(32) DEFAULT NULL,
+  `login` varchar(32) DEFAULT NULL,
+  `mdp` varchar(32) DEFAULT NULL,
   `imgProfil` varchar(255) DEFAULT NULL,
   `estAdmin` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)

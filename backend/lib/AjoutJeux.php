@@ -51,8 +51,6 @@
         }
     }
 
-    
-
-    header("Location: ../newGame.php");
+    header("Location: ../listeJeux.php");
 
 ?>

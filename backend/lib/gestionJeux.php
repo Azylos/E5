@@ -1,62 +1,34 @@
 <?php 
     // require_once "./database/connexion.php";
-    //éditeur
+
+    // editeur
+
     function ShowEditor() {
         global $connexion;
+        $editeurs = [];
         $req = "SELECT * FROM editeur";
         $result = $connexion->query($req);
-        return $result;
-    }
-
-    function AddEditor($nom) {
-        global $connexion;
-        $req = "INSERT INTO editeur (nom) VALUES ('$nom')";
-        $result = $connexion->exec($req);
-        return $result;
-    }
-
-    function UpdateEditor($id, $nouveauNom) {
-        global $connexion;
-        $req = "UPDATE editeur SET nom = '$nouveauNom' WHERE id = $id";
-        $result = $connexion->exec($req);
-        return $result;
-    }
-
-    function DeleteEditor($id) {
-        global $connexion;
-        $req = "DELETE FROM editeur WHERE id = $id";
-        $result = $connexion->exec($req);
-        return $result;
+        if ($result) {
+            while ($row = $result->fetch()) {
+                $editeurs[] = $row;
+            }
+        }
+        return $editeurs;
     }
 
     //genre
 
     function ShowGenre() {
         global $connexion;
+        $genres = [];
         $req = "SELECT * FROM genre";
         $result = $connexion->query($req);
-        return $result;
-    }
-    
-    function AddGenre($libelle) {
-        global $connexion;
-        $req = "INSERT INTO genre (libelle) VALUES ('$libelle')";
-        $result = $connexion->exec($req);
-        return $result;
-    }
-    
-    function UpdateGenre($id, $nouveauLibelle) {
-        global $connexion;
-        $req = "UPDATE genre SET libelle = '$nouveauLibelle' WHERE id = $id";
-        $result = $connexion->exec($req);
-        return $result;
-    }
-    
-    function DeleteGenre($id) {
-        global $connexion;
-        $req = "DELETE FROM genre WHERE id = $id";
-        $result = $connexion->exec($req);
-        return $result;
+        if ($result) {
+            while ($row = $result->fetch()) {
+                $genres[] = $row;
+            }
+        }
+        return $genres;
     }
     
     // jeux
@@ -66,6 +38,13 @@
         $req = "SELECT * FROM jeux";
         $result = $connexion->query($req);
         return $result;
+    }
+
+    function ShowGamesId($id) {
+        global $connexion;
+        $req = "SELECT * FROM vue_jeux_details WHERE JeuxID = $id";
+        $result = $connexion->query($req);
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
     
     function AddGame($idEditeur, $idGenre, $titre, $description, $dateDeSortie, $image) {
@@ -88,11 +67,17 @@
         }
     }
     
-    function UpdateGame($id, $idEditeur, $idGenre, $titre, $description, $dateDeSortie, $image) {
+    function UpdateGame($idJeu, $titre, $description, $dateDeSortie, $idEditeur, $idGenre, $tarifJeux) {
         global $connexion;
-        $req = "UPDATE jeux SET IdEditeur = $idEditeur, IdGenre = $idGenre, titre = '$titre', description = '$description', dateDeSortie = '$dateDeSortie', image = '$image' WHERE id = $id";
-        $result = $connexion->exec($req);
-        return $result;
+        $stmt = $connexion->prepare("CALL ModifierJeu(?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bindParam(1, $idJeu, PDO::PARAM_INT);
+        $stmt->bindParam(2, $titre, PDO::PARAM_STR);
+        $stmt->bindParam(3, $description, PDO::PARAM_STR);
+        $stmt->bindParam(4, $dateDeSortie, PDO::PARAM_STR);
+        $stmt->bindParam(5, $idEditeur, PDO::PARAM_INT);
+        $stmt->bindParam(6, $idGenre, PDO::PARAM_INT);
+        $stmt->bindParam(7, $tarifJeux, PDO::PARAM_STR);
+        $stmt->execute();
     }
     
     function DeleteGame($id) {
@@ -103,31 +88,9 @@
     }
     
     //tarif
-    function ShowPrices() {
-        global $connexion;
-        $req = "SELECT * FROM tarif";
-        $result = $connexion->query($req);
-        return $result;
-    }
-    
     function AddPrice($id, $tarif) {
         global $connexion;
         $req = "INSERT INTO tarif (id, dateDebut, dateFin, tarif) VALUES ($id, CURDATE(), NULL, $tarif)";
         $result = $connexion->exec($req);
         return $result;
     }
-    
-    function UpdatePrice($id, $dateDebut, $dateFin, $tarif) {
-        global $connexion;
-        $req = "UPDATE tarif SET dateDebut = '$dateDebut', dateFin = '$dateFin', tarif = $tarif WHERE id = $id";
-        $result = $connexion->exec($req);
-        return $result;
-    }
-    
-    function DeletePrice($id) {
-        global $connexion;
-        $req = "DELETE FROM tarif WHERE id = $id";
-        $result = $connexion->exec($req);
-        return $result;
-    }
-    
