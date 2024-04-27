@@ -298,7 +298,21 @@ Header Style
   -o-transition: all .5s ease 0s;
   transition: all .5s ease 0s;
 }
-
+.background-header-profil {
+  background-color: #0070f8f9 !important;
+  border-radius: 0px 0px 25px 25px;
+  height: 80px!important;
+  position: fixed!important;
+  top: 0!important;
+  left: 0;
+  right: 0;
+  padding-top: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
+  -webkit-transition: all .5s ease 0s;
+  -moz-transition: all .5s ease 0s;
+  -o-transition: all .5s ease 0s;
+  transition: all .5s ease 0s;
+}
 .background-header .logo img {
   max-width: 110px;
 }

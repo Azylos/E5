@@ -152,8 +152,6 @@ https://templatemo.com/tm-589-lugx-gaming
 
   <?php
     require_once("./vues/scrollup.php");
-  ?>
-  <?php
     require_once("./vues/footer.php");
   ?>
 

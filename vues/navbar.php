@@ -13,7 +13,7 @@
     $isLogInPage = strpos($currentURI, '/logIn.php') !== false;
 ?>
 
-<header class="header-area header-sticky <?php if($isInProfile){echo 'background-header';}?>">
+<header class="header-area header-sticky <?php if($isInProfile){echo ($isLogInPage) ? 'background-header' : 'background-header-profil';}?>">
     <div class="container">
         <div class="row">
             <div class="col-12">
