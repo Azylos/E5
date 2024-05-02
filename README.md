@@ -8,7 +8,7 @@ RunGame, une récente entreprise réunionnaise qui décide de se lancer dans la 
 
 ### Utilisateur base de données :
 - Nom d'utilisateur : Rungame_Ad
-- Password : "habituelle"
+- Password : "12-Soleil&"
 
 ### Information de connexion :
 - utilisateur : user1 mdp: password
