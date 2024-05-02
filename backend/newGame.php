@@ -53,28 +53,9 @@ https://templatemo.com/tm-589-lugx-gaming
     <?php
       // Connexion à la base de données
       require_once("../database/connexion.php");
-
-      
-
-      // Récupérer les éditeurs
-      $editeurs = [];
-      $queryEditeur = "SELECT id, nom FROM editeur ORDER BY nom ASC";
-      $resultEditeur = $connexion->query($queryEditeur);
-      if ($resultEditeur) {
-          while ($row = $resultEditeur->fetch()) {
-              $editeurs[] = $row;
-          }
-      }
-
-      // Récupérer les genres
-      $genres = [];
-      $queryGenre = "SELECT id, libelle FROM genre ORDER BY libelle ASC";
-      $resultGenre = $connexion->query($queryGenre);
-      if ($resultGenre) {
-          while ($row = $resultGenre->fetch()) {
-              $genres[] = $row;
-          }
-      }
+      require_once("lib/gestionJeux.php");
+      $editeurs = ShowEditor();
+      $genres = ShowGenre();
   ?>
   <section id = "GestM">
         
@@ -99,13 +80,7 @@ https://templatemo.com/tm-589-lugx-gaming
                         <!-- <p>Photos du jeux : <br><input type = "text" name = "photosNews" maxlength="50" placeholder="ex: photo.png" ></p><br> -->
     
                         <p>Descriptions du jeux : <br><input type = "text" name = "description" maxlength="300"  required></p><br>
-    
-                        <!-- <p>Éditeur : <br><input type = "text" name = "auteurNews"  maxlength="50" placeholder="ex: Ubisoft" required ></p><br> -->
-                        <!-- <p>Éditeur : <br><select name="" id="" name = "idEditeur"  maxlength="50" placeholder="ex: Romance" required><option value=""></option></select></p><br> -->
-                        
-                        <!-- <p>Genre : <br><select name="" id="" name = "idGenre"  maxlength="50" placeholder="ex: Romance" required><option value=""></option></select></p><br> -->
-                        
-                        
+
                         <p>Éditeur : <br>
                         <select name="idEditeur" required>
                             <option value="">Sélectionnez un éditeur</option>
@@ -127,7 +102,6 @@ https://templatemo.com/tm-589-lugx-gaming
 
     
                         <button type = "submit" class="button-A" role="button"><span class="text">Ajout d'un Jeux !</span><span>Ajouter!</span></button>
-                        <!-- <input class="button" type="submit"  name="Connecter" value="Ajouter un membre !" > -->
                     </div>
                 </fieldset>
             </form>

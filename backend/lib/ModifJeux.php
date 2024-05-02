@@ -16,16 +16,7 @@
             $tarifJeux = $_POST['tarifJeux'];
     
             // Appeler la procédure stockée pour mettre à jour les informations du jeu
-            $stmt = $connexion->prepare("CALL ModifierJeu(?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bindParam(1, $idJeu, PDO::PARAM_INT);
-            $stmt->bindParam(2, $titre, PDO::PARAM_STR);
-            $stmt->bindParam(3, $description, PDO::PARAM_STR);
-            $stmt->bindParam(4, $dateDeSortie, PDO::PARAM_STR);
-            $stmt->bindParam(5, $idEditeur, PDO::PARAM_INT);
-            $stmt->bindParam(6, $idGenre, PDO::PARAM_INT);
-            $stmt->bindParam(7, $tarifJeux, PDO::PARAM_STR);
-            $stmt->execute();
-    
+            UpdateGame($idJeu, $titre, $description, $dateDeSortie, $idEditeur, $idGenre, $tarifJeux);
             // Redirection vers une page de confirmation ou une autre page
             header("Location: ../listeJeux.php");
             exit(); // Assurez-vous de terminer le script après la redirection

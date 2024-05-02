@@ -54,36 +54,11 @@ https://templatemo.com/tm-589-lugx-gaming
       // Connexion à la base de données
       require_once("../database/connexion.php");
       $idJeu = $_GET['id'];
-      
+      require_once("lib/gestionJeux.php");
+      $jeu = ShowGamesId($idJeu);
+      $editeurs = ShowEditor();
+      $genres = ShowGenre();
 
-      // Récupérer les éditeurs
-      $editeurs = [];
-      $queryEditeur = "SELECT id, nom FROM editeur ORDER BY nom ASC";
-      $resultEditeur = $connexion->query($queryEditeur);
-      if ($resultEditeur) {
-          while ($row = $resultEditeur->fetch()) {
-              $editeurs[] = $row;
-          }
-      }
-
-      // Récupérer les genres
-      $genres = [];
-      $queryGenre = "SELECT id, libelle FROM genre ORDER BY libelle ASC";
-      $resultGenre = $connexion->query($queryGenre);
-      if ($resultGenre) {
-          while ($row = $resultGenre->fetch()) {
-              $genres[] = $row;
-          }
-      }
-
-      $titre = [];
-      $queryTitre = "SELECT titre FROM jeux WHERE id = $idJeu";
-      $resultTitre = $connexion->query($queryTitre);
-      if ($resultTitre) {
-          while ($row = $resultTitre->fetch(PDO::FETCH_ASSOC)) {
-              $titre[] = $row['titre'];
-          }
-      }
   ?>
   <section id = "GestM">
         
@@ -94,11 +69,12 @@ https://templatemo.com/tm-589-lugx-gaming
                         <!-- <label class="titre_1" for="">Formulaire d'ajout d'un membres</label><br> -->
                         <legend><b> Formulaire modification du Jeux :</b> </legend> <br>
 
-                        <h3><b> <?php foreach ($titre as $titreJeu) {echo $titreJeu;} ?> </b></h3>
+                        <h3><b> <?= $jeu["Titre"] ?> </b></h3>
     
                         <input type="hidden" name="idJeu" value="<?php echo htmlspecialchars($_GET['id']); ?>">
 
-                        <br><p>Titre du jeux : <br><input type = "text" name = "titre"  maxlength="50" placeholder="ex: COD" required ></p><br>
+                        <br><p>Titre du jeux : <br><input type = "text" name = "titre"  maxlength="50" placeholder="ex: COD" required value="<?=$jeu["Titre"]?>"></p><br>
+
                         <!-- <p>Photos du jeux : <br></p>
                         <div class="AjoutFichier">
                           <form action="profil.php" method="POST" enctype="multipart/form-data">
@@ -110,17 +86,11 @@ https://templatemo.com/tm-589-lugx-gaming
     
                         <!-- <p>Photos du jeux : <br><input type = "text" name = "photosNews" maxlength="50" placeholder="ex: photo.png" ></p><br> -->
     
-                        <p>Descriptions du jeux : <br><input type = "text" name = "description" maxlength="300"  required></p><br>
-    
-                        <!-- <p>Éditeur : <br><input type = "text" name = "auteurNews"  maxlength="50" placeholder="ex: Ubisoft" required ></p><br> -->
-                        <!-- <p>Éditeur : <br><select name="" id="" name = "idEditeur"  maxlength="50" placeholder="ex: Romance" required><option value=""></option></select></p><br> -->
-                        
-                        <!-- <p>Genre : <br><select name="" id="" name = "idGenre"  maxlength="50" placeholder="ex: Romance" required><option value=""></option></select></p><br> -->
-                        
+                        <p>Descriptions du jeux : <br><input type = "text" name = "description" maxlength="300"  required value="<?=$jeu["Description"]?>"></p><br>
                         
                         <p>Éditeur : <br>
                         <select name="idEditeur" required>
-                            <option value="">Sélectionnez un éditeur</option>
+                            <option value="<?=$jeu["EditeurID"]?>"><?=$jeu["Editeur"]?></option>
                             <?php foreach ($editeurs as $editeur): ?>
                                 <option value="<?= htmlspecialchars($editeur['id']); ?>"><?= htmlspecialchars($editeur['nom']); ?></option>
                             <?php endforeach; ?>
@@ -128,18 +98,17 @@ https://templatemo.com/tm-589-lugx-gaming
                         
                         <p>Genre : <br>
                         <select name="idGenre" required>
-                            <option value="">Sélectionnez un genre</option>
+                            <option value="<?=$jeu["GenreID"]?>"><?=$jeu["Genre"]?></option>
                             <?php foreach ($genres as $genre): ?>
                                 <option value="<?= htmlspecialchars($genre['id']); ?>"><?= htmlspecialchars($genre['libelle']); ?></option>
                             <?php endforeach; ?>
                         </select></p><br>
     
-                        <p>Date de sortie : <br><input type = "date" name = "dateDeSortie" required></p><br>
-                        <p>Tarif : <br><input type="number" step="0.01" name="tarifJeux" placeholder="ex: 49.99" required>€</p><br>
+                        <p>Date de sortie : <br><input type = "date" name = "dateDeSortie" required value="<?=$jeu["DateDeSortie"]?>"></p><br>
+                        <p>Tarif : <br><input type="number" step="0.01" name="tarifJeux" placeholder="ex: 49.99" required value="<?=$jeu["Tarif"]?>">€</p><br>
 
     
                         <button type = "submit" class="button-A" role="button"><span class="text">Modifier ce Jeux !</span><span>Modifier !</span></button>
-                        <!-- <input class="button" type="submit"  name="Connecter" value="Ajouter un membre !" > -->
                     </div>
                 </fieldset>
             </form>

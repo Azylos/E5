@@ -67,7 +67,7 @@
                     $_SESSION['user']['imgProfil'] = $imgName;
                 }
     
-                echo "Image enregistrée";
+                // echo "Image enregistrée";
             } else {
                 echo "Mauvaise extension ou taille trop grande, Une erreur est survenue";
             }
@@ -80,6 +80,14 @@
         $req = "SELECT idJeux, wishlist FROM vouloir WHERE IdUtilisateurs = $IdUtilisateur";
         $result = $connexion->query($req);
         return $result;
+    }
+
+    function CountWishlist($IdUtilisateur) {
+        global $connexion;
+        $req = "SELECT count(*) as nb FROM vouloir WHERE IdUtilisateurs = $IdUtilisateur";
+        $result = $connexion->query($req);
+        $nb = $result->fetch(PDO::FETCH_ASSOC);
+        return $nb['nb'];
     }
     
     function displayWishlist($idJeux) {

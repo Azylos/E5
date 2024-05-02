@@ -1,6 +1,6 @@
 <?php 
     require_once "lib/vérifSession.php";
-    require_once("lib/gestionProfil.php");
+    require_once "lib/gestionProfil.php";
 
     if(isset($_SESSION['admin'])) {
         $id = $_SESSION['admin']['id'];
@@ -51,6 +51,8 @@
     <br>
     <br>
     <div class="AjoutFichier">
+        <h4>Changer la photo de profil :</h4>
+        <br><br>
         <form action="profil.php" method="POST" enctype="multipart/form-data">
             <label for="file">Fichier</label>
             <input type="file" name="file">
@@ -59,6 +61,8 @@
     </div>
     <div class="section trending">
         <div class="container">
+            <h1><?= CountWishlist($id) ?> jeux en Wishlist</h1>
+            <br><br>
             <div class="row trending-box">
                 <?php
                     $wishlist = ShowWishlist($id);
@@ -87,8 +91,8 @@
         </div>
     </div>
     <?php
-        require_once("../vues/footer.php");
-    ?>
+    require_once("../vues/footer.php");
+  ?>
     
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
